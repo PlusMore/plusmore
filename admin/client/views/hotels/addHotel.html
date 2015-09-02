@@ -1,0 +1,41 @@
+<template name="addHotel">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a class='back' href="{{pathFor 'hotels'}}">
+          <i class="icon icon-back"></i>
+          Back to Hotels
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="modal-content inline">
+          <div class="modal-header">
+            <h3 class="modal-title">
+              Add Hotel
+            </h3>
+          </div>
+          {{#autoForm collection=hotels id='addHotel' type="insert"}}
+            <div class="modal-body">
+              {{> afQuickField name='name'}}
+              <!-- {{> afQuickField name='street'}}
+              {{> afQuickField name='city'}}
+              {{> afQuickField name='state'}}
+              {{> afQuickField name='zip'}} -->
+              {{> afQuickField name='phone'}}
+              {{> afQuickField name='taxRate' step='0.001'}}
+              {{> afQuickField name='importsEmail'}}
+              {{> afQuickField name='trackAnalytics'}}
+              {{> afQuickField name='hotelServicesEnabled'}}
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-default">Add Hotel</button>
+            </div>
+          {{/autoForm}}
+        </div><!-- /.modal-content -->
+      </div>
+    </div>
+  </div>
+</template>

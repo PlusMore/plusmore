@@ -1,0 +1,67 @@
+<template name="reservation">
+  <header>
+    <h3>
+      Reservation {{#if experience}}for {{experience.title}}{{else}}info is no longer available{{/if}}
+      <small class="pull-right">
+        {{orderStatus}}
+      </small>
+    </h3>
+  </header>
+
+  {{#if isCancelled}}
+    <div class="time-ago">
+      <span>Cancelled {{cancelledDateMomentAgo}}</span>
+    </div>
+
+  {{else}}
+    <div class="reservation-details">
+      <p>{{when}}</p>
+      <p>{{reservation.partyName}} - Party of {{reservation.partySize}}</p>
+    </div>
+    <div class="venue">
+      {{#with experience}}
+        <div><strong>{{venueName}}</strong></div>
+        <div>{{geo.streetNumber}} {{geo.streetName}}</div>
+        <div>{{geo.city}}, {{geo.state}} {{geo.zipcode}}</div>
+      {{/with}}
+    </div>
+
+    <div class='time-ago'>
+      <span>Requested {{requestedDateTimeAgo}}</span>
+    </div>
+    {{#unless isExpired}}
+      {{#if isConfirmed}}
+        <!-- CALL TO CANCEL -->
+        <div class="buttons pull-right">
+          <a class="btn btn-default btn-call-to-cancel">Cancel Reservation</a>
+        </div>
+      {{else}}
+        <!-- EASY CANCEL -->
+        <div class="buttons pull-right">
+          <a class="btn btn-default btn-cancel-reservation">Cancel Reservation</a>
+        </div>
+      {{/if}}
+    {{/unless}}
+  {{/if}}
+</template>
+
+<template name="reservationCallToCancelModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="pull-right">
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">
+              <i class="icon icon-x"></i>
+            </span>
+            <span class="sr-only">Close</span>
+          </button>
+        </div>
+        <h2 class="modal-title animated fadeInRight">Change of Plans?</h2>
+      </div>
+      <div class="modal-body">
+        <h2 class="modal-title text-center animated fadeInRight">Please call {{phone}} to cancel your reservation at {{title}}. Thanks!</h2>
+      </div>
+    </div>
+  </div>
+</template>

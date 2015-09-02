@@ -1,0 +1,9 @@
+<template name="StayDetailsModal">
+  {{#with stay}}
+    <div class="modal-dialog">
+      <div class="modal-content">
+        {{> UI.dynamic template=stayType data=this}}
+      </div>
+    </div>
+  {{/with}}
+</template>

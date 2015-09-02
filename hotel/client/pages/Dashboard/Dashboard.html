@@ -1,0 +1,37 @@
+<template name="Dashboard">
+  {{#Layout template="Page"}}
+
+    {{#contentFor "header"}}
+      <h1>Dashboard</h1>
+      <p class="description">{{hotelName}}, at a glance!</p>
+    {{/contentFor}}
+
+    {{#contentFor "breadcrumb"}}
+      <li class="active">Dashboard</li>
+    {{/contentFor}}
+
+
+    <!-- Hotel Content -->
+
+    <div class="row">
+      <div class="col-sm-6">
+        {{> ActiveStaysWidget}}
+      </div>
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col-xs-12">
+            {{> OpenOrdersWidget}}
+          </div>
+          <div class="col-xs-12">
+            {{> GuestCheckInWidget}}
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12">
+        {{> WeatherWidget}}
+      </div>
+    </div>
+
+
+  {{/Layout}}
+</template>

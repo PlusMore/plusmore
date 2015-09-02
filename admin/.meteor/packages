@@ -1,0 +1,33 @@
+# Meteor packages used by this project, one per line.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-platform
+accounts-base
+accounts-password
+less
+email
+alanning:roles@1.2.10
+aldeed:autoform
+aldeed:collection2
+underscore
+jquery
+broth:inspector@0.2.2
+natestrauser:font-awesome@4.1.0
+percolatestudio:percolatestudio-mixpanel@0.5.0
+aldeed:geocoder@0.3.0
+mrt:migrations@0.0.2
+mrt:googlemaps@0.0.2
+lezed1:bootstrap-errors@0.3.1
+iron:router
+ian:bootstrap-3
+ian:accounts-ui-bootstrap-3
+jeremy:selectize
+mrt:moment
+patrickleet:tags
+natestrauser:filepicker-plus
+fastclick
+plusmore:plus-more-icons
+plusmore:pickadate-default-theme
+meteorhacks:cluster

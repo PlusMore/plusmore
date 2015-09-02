@@ -1,0 +1,47 @@
+# Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-platform
+iron:router
+less
+nemo64:bootstrap@3.3.4_1
+mquandalle:bower@1.3.12
+momentjs:moment
+natestrauser:animate-css
+cwaring:modernizr
+awatson1978:dropzone
+aldeed:tabular
+iron:layout
+ian:accounts-ui-bootstrap-3
+accounts-password
+aldeed:simple-schema
+alanning:roles
+aldeed:autoform@=5.1.2
+aldeed:collection2
+underscore
+copleykj:simple-publish
+email
+meteorhacks:inject-initial
+coffeescript
+dburles:collection-helpers
+natestrauser:filepicker-plus
+plusmore:pickadate-default-theme
+plusmore:plus-more-icons
+tmeasday:publish-counts
+selaias:meteor-simpleweather
+plusmore:reactive-responsive-helpers
+msavin:mongol
+force-ssl
+robertlowe:autoform-pickadate
+reactive-var
+meteorhacks:kadira
+sacha:spin
+browser-policy
+lookback:dropdowns
+meteorhacks:cluster
+raix:eventemitter
+plusmore:progress-buttons
+patrickleet:bootstrap-modal-prompt

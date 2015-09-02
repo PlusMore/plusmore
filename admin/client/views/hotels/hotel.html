@@ -1,0 +1,29 @@
+<template name="hotel">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a class='back' href="{{pathFor 'hotels'}}">
+          <i class="icon icon-back"></i>
+          Back to Hotels
+        </a>
+      </div>
+    </div>
+    {{#with hotel}}
+      <div class="row">
+        <div class="col-md-12">         
+          {{> editHotel}}
+        </div>    
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          {{> manageHotelUsers}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          {{> customizeBackground}}
+        </div>
+      </div>
+    {{/with}}
+  </div>
+</template>

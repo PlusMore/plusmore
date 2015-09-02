@@ -1,0 +1,28 @@
+<template name="categories">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+          <div class="modal-content inline">
+            <div class="modal-header">
+              <h3 class="modal-title">Experience Categories</h3>
+            </div>
+            <div class="modal-body">
+              {{#each categories}}
+                <a href="{{categoryLink}}" class="category list-item {{enabledClass}}">
+                  <i class="icon {{iconClass}}"></i>
+                  {{name}}
+                  <div class="pull-right">
+                    <span class='isActive'>{{isActive}}</span>
+                    <a href="{{pathFor 'category'}}" class="btn btn-default btn-xs">Edit Category</a>
+                  </div>
+                </a>
+              {{/each}}
+            </div>
+            <div class="modal-footer">
+              <a href="{{pathFor 'addCategory'}}" class="btn btn-default">Add New Category</a>
+            </div>
+          </div><!-- /.modal-content -->
+      </div>    
+    </div>
+  </div>
+</template>

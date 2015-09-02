@@ -1,0 +1,22 @@
+<template name="navEditor">
+	{{#Layout template="contentLayout"}}
+    {{#contentFor "title"}}
+      Navigation Editor
+    {{/contentFor}}
+    {{#if Template.subscriptionsReady}}
+      <div class="container">
+      	{{#each navCategories}}
+  				{{> navCategory}}
+  			{{/each}}
+  			<div class="modal-content inline">
+  				<div class="modal-header">
+  					<a href="#" id="new-nav-category">+Add New Category</a>
+  				</div>
+  			</div>
+  		</div>
+    {{else}}
+      {{> loadingAnimation}}
+    {{/if}}
+
+  {{/Layout}}
+</template>

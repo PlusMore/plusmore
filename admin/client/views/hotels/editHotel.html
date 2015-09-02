@@ -1,0 +1,37 @@
+<template name="editHotel">
+  <div class="modal-content inline">
+    <div class="modal-header">
+      <h3 class="modal-title">
+        {{name}}
+      </h3>
+    </div>
+    {{#autoForm collection=hotels id='editHotel' doc=this type="update"}}
+      <div class="modal-body">
+        {{> afQuickField name='name'}}
+
+        <div class="form-group">
+          <label class="control-label" for="venueName">Address Search</label>
+          <input type="text" name="address" class="form-control" >
+        </div>
+<pre>({{geo.latitude}}, {{geo.longitude}})
+{{geo.streetNumber}} {{geo.streetName}}
+{{geo.city}} {{geo.state}} ({{geo.stateCode}}), {{geo.zipcode}}
+{{geo.country}} ({{geo.countryCode}})</pre>
+
+
+<!--         {{> afQuickField name='street'}}
+        {{> afQuickField name='city'}}
+        {{> afQuickField name='state'}}
+        {{> afQuickField name='zip'}} -->
+        {{> afQuickField name='phone'}}
+        {{> afQuickField name='taxRate' step='0.001'}}
+        {{> afQuickField name='importsEmail'}}
+        {{> afQuickField name='trackAnalytics'}}
+        {{> afQuickField name='hotelServicesEnabled'}}
+      </div>
+      <div class="modal-footer">
+        <button type="submit" data-meteor-method="addHotelStaff" class="btn btn-default">Update Hotel Info</button>
+      </div>
+    {{/autoForm}}
+  </div><!-- /.modal-content -->
+</template>

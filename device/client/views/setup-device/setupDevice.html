@@ -1,0 +1,85 @@
+<template name="setupDevice">
+  {{#Layout template="contentLayout"}}
+    {{#contentFor "title"}}
+      Kiosk Mode
+    {{/contentFor}}
+
+    <div  class="row animated somewhat-faster fadeInUp">
+      <div class="col-xs-12 col-md-6 col-md-offset-3 col-xs-no-padding">
+        <div class="modal-content inline">
+
+          {{#if Template.subscriptionsReady}}
+
+            {{#autoForm schema=setupDeviceSchema id="setupDeviceForm" type="method" meteormethod="setupDevice" ddp=hotelServiceDDP}}
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    {{> afQuickField name="hotelId" id="select-hotel" firstOption="--Select Hotel--" options=hotelOptions}}
+                    {{#if hotelSelected}}
+                      {{> afQuickField name="roomId" firstOption="--Select Room--" options=roomOptions}}
+                      {{> afQuickField name="replacement"}}
+                    {{/if}}
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-default btn-lg">Setup Device</button>
+              </div>
+            {{/autoForm}}
+
+          {{else}}
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-md-12" style="min-height: 100px;">
+                  {{> loadingAnimation}}
+                </div>
+              </div>
+            </div>
+          {{/if}}
+        </div><!-- /.modal-content -->
+      </div>
+    </div>
+
+  {{/Layout}}
+</template>
+
+<template name="setupDeviceForm">
+
+    <div class="modal-content inline">
+
+      {{#autoForm schema=setupDeviceSchema id="setupDeviceForm" type="method" meteormethod="setupDevice"}}
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+              {{> afQuickField name="hotelId" id="select-hotel" firstOption="--Select Hotel--" options=hotelOptions}}
+              {{#if hotelSelected}}
+                {{> afQuickField name="roomId" firstOption="--Select Room--" options=roomOptions}}
+                {{> afQuickField name="replacement"}}
+              {{/if}}
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-default btn-lg">Setup Device</button>
+        </div>
+      {{/autoForm}}
+
+    </div><!-- /.modal-content -->
+
+</template>
+
+   <!--  <div class="section">
+      {{#autoForm schema=setupDeviceSchema id="setupDeviceForm" type="method" meteormethod="setupDevice"}}
+        <fieldset>
+          {{> afQuickField name="hotelId" firstOption="-Select Hotel-" options=hotelOptions}}
+
+          {{> afQuickField name='location'}}
+
+          {{> afQuickField name='replacement'}}
+
+          <div>
+            <button type="submit" data-meteor-method="setupDevice" class="btn btn-primary">Setup Device</button>
+          </div>
+        </fieldset>
+      {{/autoForm}}
+    </div> -->

@@ -1,0 +1,64 @@
+<template name="deviceLayout">
+  <img id="device-bg" src="https://www.filepicker.io/api/file/hsuErOpQRDKvS7EGu3MD" alt="">
+
+  <div class="preloader {{loaderClass}}">
+    <div class="loader-text">{{loaderText}}</div>
+    <div class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+  </div>
+
+  {{> meteorErrors}}
+  <div id="perspective" class="perspective effect-persepctive-shift {{modalview}} {{showMenu}} {{modalOpen}}">
+    <div class="perspective-container">
+      <img class="bg" alt='bg' src="{{hotelPhotoUrl}}" />
+      <div class="overlay-bg black"></div>  
+
+      <div class="outer">
+        <div class="holder">
+          {{#if currentUser}}
+            {{> yield}}
+          {{else}}
+            
+            {{#if registeredDevice}}
+              {{> yield}}
+            {{else}}
+          
+              {{#if loggingIn}}
+              {{else}}
+                {{> login}}
+              {{/if}}  
+
+            {{/if}}
+    
+          {{/if}}
+        </div>
+      </div>
+        
+    </div>
+  
+    {{> navbarOuterNav}}
+    {{> mainNav}}
+    
+  </div>
+
+  <!-- Overlays -->
+  <!-- These overlays are shown based on Session variables and can be shown while anywhere in the app -->
+
+  {{> browser}}
+
+  <!-- Dynamic Modal -->
+  <!-- Eventually all modals should transition to this pattern -->
+  {{> experienceModal}}
+  {{> modal}}
+
+
+  <!-- Gallery -->
+  {{> gallery}}
+
+  {{> idleOverlay}}
+  
+  <div data-status="{{connectionStatus}}"></div>
+</template>

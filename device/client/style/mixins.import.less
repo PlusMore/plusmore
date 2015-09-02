@@ -1,0 +1,51 @@
+.vertical-center() {
+  position: absolute;
+  top: 50%;
+  .translate(0,-50%);
+}
+
+.fill() {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: 0;
+}
+
+.fill-container() {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: 0;
+}
+
+.center() {
+  text-align: center;
+}
+
+.translateZ(@z) {
+  -webkit-transform: translateZ(@z);
+      -ms-transform: translateZ(@z); // IE9 only
+          transform: translateZ(@z);
+}
+
+.preserve-3d() {
+  -webkit-transform-style: preserve-3d;
+      -ms-transform-style: preserve-3d; // IE9 only
+          transform-style: preserve-3d;
+}
+
+.parallax(@z, @scale) {
+  -webkit-transform: translateZ(@z) scale(@scale);
+      -ms-transform: translateZ(@z) scale(@scale); // IE9 only
+          transform: translateZ(@z) scale(@scale);
+}  
+
+.box-reflect(@type) {
+  -webkit-box-reflect: @type;
+      -ms-box-reflect: @type;
+          box-reflect: @type;
+}

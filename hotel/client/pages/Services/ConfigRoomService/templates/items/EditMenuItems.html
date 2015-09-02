@@ -1,0 +1,19 @@
+<template name="EditMenuItems">
+  {{#if hasMenuItems}}
+    {{#each menuItemsForCategory}}
+      <div class="col-xs-11 col-md-5">
+        <a id="edit-menu-item" href="#" class="list-item editable {{enabledClass}}">
+          {{name}} {{isActive}}
+          <small class='pull-right'>${{price}}</small>
+        </a>
+      </div>
+      <div class="col-xs-1 col-md-1">
+        <small><a href="#" class="icon icon-x" id="remove-menu-item"></a></small>
+      </div>
+    {{/each}}
+  {{else}}
+    <div class="col-xs-12">
+      <p class="lead">No items.</p>
+    </div>
+  {{/if}}
+</template>

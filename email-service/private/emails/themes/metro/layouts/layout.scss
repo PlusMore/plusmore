@@ -1,0 +1,108 @@
+body{
+  width: 100%;
+  background-color: #e6e5e7;
+  margin:0;
+  padding:0;
+  -webkit-font-smoothing: antialiased;
+  mso-margin-top-alt:0px; mso-margin-bottom-alt:0px; mso-padding-alt: 0px 0px 0px 0px;
+}
+
+p,h1,h2,h3,h4{
+  margin-top:0;
+  margin-bottom:0;
+  padding-top:0;
+  padding-bottom:0;
+}
+
+span.preheader{display: none; font-size: 1px;}
+
+html{
+width: 100%;
+}
+
+table{
+font-size: 14px;
+border: 0;
+}
+
+/* ----------- responsivity ----------- */
+@media only screen and (max-width: 640px){
+/*------ top header ------ */
+.main-header{line-height: 28px !important;}
+.main-subheader{line-height: 28px !important;}
+
+/*--------logo-----------*/
+.logo{width: 128px !important;}
+
+/*----- main image -------*/
+.main-image img{width: 440px !important; height: auto !important;}
+.hide-for-iphone{display: none !important;}
+.sidebar{height: auto !important;}
+
+/*--------- blog -------------*/
+.blogSection{width: 330px !important;}
+
+/*--------- divider ----------*/
+.divider img{width: 420px !important; height: 1px !important;}
+
+/*--------- banner ----------*/
+.banner img{width: 430px !important; height: auto !important;}
+/*-------- container --------*/
+.container590{width: 440px !important;}
+.container580{width: 420px !important;}
+.container300{width: 215px !important;}
+
+/*-------- secions ----------*/
+.section-item{width: 420px !important;}
+.section-img img{width: 440px !important; height: auto !important;}
+
+.cta-header{line-height: 26px !important;}
+
+/*-- --------- socials ----------- --*/
+.social-container{width: 215px !important;}
+
+}
+
+@media only screen and (max-width: 479px){
+
+/*------ top header ------ */
+.main-header{line-height: 28px !important;}
+.main-subheader{line-height: 28px !important;}
+
+/*--------logo-----------*/
+.logo{width: 280px !important;}
+.date{width: 280px !important;}
+.date-inside{width: 150px !important;}
+.hideforiphone{display: none !important;}
+
+/*----- main image -------*/
+.main-image img{width: 280px !important; height: auto !important;}
+.hide-for-iphone{display: none !important;}
+.sidebar{height: auto !important;}
+
+/*--------- blog -------------*/
+.blogSection{width: 220px !important;}
+.containerDate{width: 40px !important;}
+.blog-title{font-size: 15px !important;}
+
+/*--------- divider ----------*/
+.divider img{width: 260px !important; height: 1px !important;}
+
+/*--------- banner ----------*/
+.banner img{width: 270px !important; height: auto !important;}
+/*-------- container --------*/
+.container590{width: 280px !important;}
+.container580{width: 260px !important;}
+.container300{width: 280px !important;}
+.container560{width: 260px !important;}
+
+
+/*-------- secions ----------*/
+.section-item{width: 260px !important;}
+.section-img img{width: 280px !important; height: auto !important;}
+
+.cta-header{line-height: 26px !important;}
+
+/*-- --------- socials ----------- --*/
+.social-container{width: 280px !important;}
+}

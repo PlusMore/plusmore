@@ -1,0 +1,30 @@
+<template name="service">
+  <header>
+    <h3>
+      Request for {{friendlyServiceType}}
+      <small class="pull-right">
+        {{orderStatus}}
+      </small>
+    </h3>
+  </header>
+  
+  {{#if isCancelled}}
+    <div class="time-ago">
+      <span>Cancelled {{cancelledDateMomentAgo}}</span>  
+    </div>
+    
+  {{else}}
+    <div class="service-details">
+      {{> serviceDetails}}
+    </div>
+    
+    <div class='time-ago'>
+      <span>Requested {{requestedDateTimeAgo}}</span>
+    </div>
+    {{#if isCancelable}}
+      <div class="buttons pull-right">
+        <a class="btn btn-default btn-cancel-request">Cancel Request</a>
+      </div>
+    {{/if}}
+  {{/if}}
+</template>

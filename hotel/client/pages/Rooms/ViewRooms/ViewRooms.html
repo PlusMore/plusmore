@@ -1,0 +1,42 @@
+<template name="ViewRooms">
+  {{#Layout template="Page"}}
+    {{#contentFor "header"}}
+      <h1>View Rooms</h1>
+    {{/contentFor}}
+
+    {{#contentFor "breadcrumb"}}
+      <li>
+        <a href="{{pathFor 'Dashboard'}}">Dashboard</a>
+      </li>
+      <li class="active">Rooms</li>
+    {{/contentFor}}
+
+    <!-- page content -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">View Rooms</h3>
+            <div class="actions pull-right">
+              <i class="icon icon-fw icon-chevron-down"></i>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-12">
+                {{#if currentUser.isManager}} <!-- collection helper -->
+                  <a href="{{pathFor 'Rooms.Configure'}}" class="btn btn-sm btn-primary pull-right">Add Rooms</a>
+                {{/if}}
+              </div>
+              <div class="col-xs-12">
+                {{> tabular table=TabularTables.ViewRooms selector=selector class="table table-condensed table-hover"}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- page content end -->
+
+  {{/Layout}}
+</template>

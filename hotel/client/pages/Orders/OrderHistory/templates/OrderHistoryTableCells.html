@@ -1,0 +1,18 @@
+<template name="orderHistoryRequestedCell">
+  <h3>{{formattedRequestedWhen}}</h3><!-- collection helper -->
+  <h3><small>{{orderedByFullName}} {{room.name}}</small></h3><!-- collection helper -->
+</template>
+
+<template name="orderHistoryTypeCell">
+  <h3>{{friendlyServiceType}}</h3><!-- collection helper -->
+</template>
+
+<template name="orderHistoryStatusCell">
+  <h3>{{friendlyStatus}}</h3><!-- collection helper -->
+  <h3><small>{{formattedClosedWhen}}</small></h3><!-- collection helper -->
+  <h3><small>{{closedByFullName}}</small></h3><!-- collection helper -->
+</template>
+
+<template name="orderHistoryViewCell">
+  <button type="button" class="btn btn-primary btn-sm" id="view-order-details">View</button>
+</template>

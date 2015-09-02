@@ -1,0 +1,16 @@
+<template name="hotelStaff">
+  {{#if hasUsers}}
+    {{#each hotelStaff}}
+      {{> hotelStaffItem}}
+    {{/each}}
+  {{else}}
+    <span class='list-item'>There are no users. Add one by clicking the 'Add New User' button below.</span>
+  {{/if}}
+</template>
+
+<template name="hotelStaffItem">
+  <a class='list-item'>
+    {{emailAddress}}
+    <span class="pull-right">{{role}}</span>
+  </a>
+</template>
