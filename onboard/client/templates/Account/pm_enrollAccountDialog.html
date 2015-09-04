@@ -1,0 +1,41 @@
+<template name="pm_enrollAccountDialog">
+  {{#if inEnrollAccountFlow}}
+    <div class="modal animated slideInUp fast" id="login-buttons-enroll-account-modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Your Free PlusMore Account</h4>
+          </div>
+
+          <div class="modal-body">
+            {{#if Template.subscriptionsReady}}
+              {{#with user}}
+                <p>
+                  {{profile.firstName}} {{profile.lastName}}, <br>
+                  Your hotel has partnered with PlusMore to allow you to control your stay on the go.
+                </p>
+                <ul>
+                  <li><p>Order in-room amenties!</p></li>
+                  <li><p>Make Primetime Reservations!</p></li>
+                </ul>
+                <p>Just choose a password for <strong>{{services.password.reset.email}}</strong> to get started.</p>
+                <input id="enroll-account-password" class="form-control" type="password" placeholder="{{i18n 'enrollAccountDialog.newPassword'}}" /><br>
+                <input id="enroll-account-password-again" class="form-control" type="password" placeholder="{{i18n 'enrollAccountDialog.newPasswordAgain'}}" /><br>
+                {{> _loginButtonsMessages}}
+              {{/with}}
+            {{else}}
+              {{> spinner}}
+            {{/if}}
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-primary" id="login-buttons-enroll-account-button">
+              <!-- {{i18n 'enrollAccountDialog.submit'}} -->
+              Open PlusMore
+            </button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dalog -->
+    </div><!-- /.modal -->
+  {{/if}}
+</template>

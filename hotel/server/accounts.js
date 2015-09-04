@@ -6,13 +6,14 @@ Accounts.emailTemplates.enrollAccount.subject = function(user) {
 Accounts.emailTemplates.enrollAccount.text = function(user, url) {
   var spliturl = url.split('/#');
 
-  var appUrl = Meteor.settings.apps.hotel.url;
+  debugger;
+  var appUrl = Cluster.discovery.pickEndpoint('hotel');
 
   if (Roles.userIsInRole(user, ['guest'])) {
-    appUrl = Meteor.settings.apps.device.url;
+    appUrl = Cluster.discovery.pickEndpoint('onboard');
   }
 
-  appUrl += '/#' + spliturl[1];
+  appUrl += '#' + spliturl[1];
 
   return "To activate your account, simply click the link below:\n\n" +
     appUrl;
@@ -21,13 +22,13 @@ Accounts.emailTemplates.enrollAccount.text = function(user, url) {
 Accounts.emailTemplates.verifyEmail.text = function(user, url) {
   var spliturl = url.split('/#');
 
-  var appUrl = Meteor.settings.apps.hotel.url;
+  var appUrl = Cluster.discovery.pickEndpoint('hotel');
 
   if (Roles.userIsInRole(user, ['guest'])) {
-    appUrl = Meteor.settings.apps.device.url;
+    appUrl = Cluster.discovery.pickEndpoint('onboard');
   }
 
-  appUrl += '/#' + spliturl[1];
+  appUrl += '#' + spliturl[1];
 
   return "To verify your account email, simply click the link below.:\n\n" +
     appUrl;

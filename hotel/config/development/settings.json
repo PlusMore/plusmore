@@ -15,6 +15,9 @@
     },
     "hotel": {
       "url": "http://localhost:5000"
+    },
+    "onboard": {
+      "url": "http://localhost:3040"
     }
   }
 }

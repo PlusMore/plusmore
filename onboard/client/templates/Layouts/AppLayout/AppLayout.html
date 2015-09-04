@@ -1,0 +1,33 @@
+<template name="AppLayout">
+    {{> Loader}}
+    {{> yield "modals"}}
+
+    {{> logo}}
+
+    {{> sAlert}}
+    {{> meteorStatus}}
+</template>
+
+<template name="logo">
+    <div class="full-bg"></div>
+    <div id="logo" class="full-centered">
+
+        <div id="logo-wrapper" class="animated fadeIn">
+            <img src="/img/logo.png" alt="">
+            {{#if showManualRedirect}}
+                <br>
+                <a class="btn btn-primary btn-round js-open-app">Open PlusMore App</a>
+            {{/if}}
+            {{#if redirecting}}
+                <br>
+                {{> redirect}}
+            {{/if}}
+
+        </div>
+
+    </div>
+</template>
+
+<template name="redirect">
+    <span class="default-color">Redirecting...</span>
+</template>
