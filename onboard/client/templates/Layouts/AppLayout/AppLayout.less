@@ -1,0 +1,59 @@
+@import '/client/style/imports.import.less';
+
+#ios-status-bar {
+  background: @primaryColor;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 20px;
+  z-index: 100;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+}
+
+.slideout-menu {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 0;
+  width: 256px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  display: none;
+}
+
+.slideout-panel, #panel {
+  position:fixed;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #F0F3F3;
+  box-shadow: @shadowColor -2px 0px 6px;
+}
+
+.slideout-open,
+.slideout-open body,
+.slideout-open .slideout-panel {
+  overflow: hidden;
+}
+
+.slideout-open .slideout-menu {
+  display: block;
+}
+
+#logo-wrapper {
+  text-align: center;
+}
+
+.btn.js-open-app {
+  border: 1px solid @white;
+  margin-bottom: 1px;
+}
