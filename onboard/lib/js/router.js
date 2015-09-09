@@ -12,18 +12,11 @@ var filters = {
       }, 400);
     });
     this.next();
-  },
-  closeMenu: function() {
-    Meteor.setTimeout(function() {
-      return App.UI.menu && App.UI.menu.close();
-    });
-    this.next();
   }
 };
 
 if (Meteor.isClient) {
   Router.onRun(filters.scroll);
-  Router.onBeforeAction(filters.closeMenu);
 }
 
 Router.route('/', function () {
