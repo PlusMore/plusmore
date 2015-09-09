@@ -5,5 +5,8 @@
     "messenger": "~1.4.1",
     "gauge.js": "~1.2.1"
   },
+  "ignoredDependencies": [
+    "jquery"
+  ],
   "private": true
 }
