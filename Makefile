@@ -11,8 +11,8 @@ mongo-compose:
 	mongo candidate.0.mongolayer.com:10412/plusmore -u plusmore -p
 
 get-compose-data:
-	mongodump --host candidate.0.mongolayer.com:10412 --db plusmore -u plusmore -o /data/backup/plusmore
-	mongorestore -host localhost --port 27017 --drop /data/backup/plusmore
+	mongodump --host candidate.0.mongolayer.com:10412 --db plusmore -u plusmore -o /data/backup/plusmore --excludeCollection system.users
+	mongorestore --host localhost --port 27017 --drop /data/backup/plusmore
 
 backup-prod:
 	mongodump --host candidate.0.mongolayer.com:10412 --db plusmore -u plusmore -p -o /data/backup/
