@@ -8,7 +8,7 @@ mongo:
 	mongo --port 27017
 
 mongo-compose:
-	mongo candidate.0.mongolayer.com:10412/plusmore -u plusmore -p
+	mongo candidate.11.mongolayer.com:10410/plusmore -u plusmore -p
 
 get-compose-data:
 	mongodump --host candidate.0.mongolayer.com:10412 --db plusmore -u plusmore -o /data/backup/plusmore --excludeCollection system.users
