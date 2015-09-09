@@ -46,12 +46,11 @@ Template.logo.events({
 });
 
 Template.redirect.rendered = function () {
-  if(navigator.userAgent.toLowerCase().indexOf("android") > -1){
-    document.location = 'https://play.google.com/store/apps/details?id=com.plusmoretablets.device&hl=en';
+  if (navigator.userAgent.toLowerCase().indexOf("android") > -1){
+    return document.location = 'https://play.google.com/store/apps/details?id=com.plusmoretablets.device&hl=en';
+  } else if (navigator.userAgent.toLowerCase().indexOf("iphone") > -1){
+    return document.location = 'https://itunes.apple.com/us/app/plusmore-hotels/id948792804?mt=8';
+  } else {
+    return document.location = 'https://device.plusmoretablets.com';
   }
-  if(navigator.userAgent.toLowerCase().indexOf("iphone") > -1){
-    document.location = 'https://itunes.apple.com/us/app/plusmore-hotels/id948792804?mt=8';
-  }
-
-  document.location = 'https://device.plusmoretablets.com';
 };
