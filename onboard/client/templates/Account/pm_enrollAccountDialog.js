@@ -25,3 +25,7 @@ Template.pm_enrollAccountDialog.helpers({
 });
 
 Template._enrollAccountDialog.inheritsHelpersFrom("pm_enrollAccountDialog");
+
+Template.codeUsed.rendered = function () {
+  Session.set('showManualRedirect', true);
+};

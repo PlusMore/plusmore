@@ -1,10 +1,4 @@
 Template.AppLayout.helpers({
-  onboarded: function() {
-    var user = Meteor.user();
-
-    console.log('Render Onboarded Layout?', user.onboarded);
-    return user.onboarded;
-  },
   ios: function() {
     return Session.get('iOS-standalone') ? 'ios' : '';
   }
@@ -15,6 +9,8 @@ Tracker.autorun(function() {
 
   if (user) {
     Session.set('redirect', true);
+  } else {
+    Session.set('redirect', false);
   }
 });
 
@@ -45,12 +41,21 @@ Template.logo.events({
   }
 });
 
-Template.redirect.rendered = function () {
-  if (navigator.userAgent.toLowerCase().indexOf("android") > -1){
-    return document.location = 'https://play.google.com/store/apps/details?id=com.plusmoretablets.device&hl=en';
-  } else if (navigator.userAgent.toLowerCase().indexOf("iphone") > -1){
-    return document.location = 'https://itunes.apple.com/us/app/plusmore-hotels/id948792804?mt=8';
-  } else {
-    return document.location = 'https://device.plusmoretablets.com';
+Template.redirect.onRendered(function () {
+  var redirectTo = 'https://device.plusmoretablets.com';
+  console.log('redirecting...');
+
+  if (navigator.userAgent.toLowerCase().indexOf("android") > -1) {
+    console.log('android detected, redirecting to play store.');
+    redirectTo = 'https://play.google.com/store/apps/details?id=com.plusmoretablets.device&hl=en';
+  } else if (navigator.userAgent.toLowerCase().indexOf("iphone") > -1) {
+    console.log('iphone detected, redirecting to app store.')
+    redirectTo = 'https://itunes.apple.com/us/app/plusmore-hotels/id948792804?mt=8';
   }
-};
+
+  Meteor.setTimeout(function() {
+    document.location = redirectTo;
+  }, 100)
+
+
+});

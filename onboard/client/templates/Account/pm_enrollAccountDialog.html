@@ -9,33 +9,49 @@
 
           <div class="modal-body">
             {{#if Template.subscriptionsReady}}
-              {{#with user}}
-                <p>
-                  {{profile.firstName}} {{profile.lastName}}, <br>
-                  Your hotel has partnered with PlusMore to allow you to control your stay on the go.
-                </p>
-                <ul>
-                  <li><p>Order in-room amenties!</p></li>
-                  <li><p>Make Primetime Reservations!</p></li>
-                </ul>
-                <p>Just choose a password for <strong>{{services.password.reset.email}}</strong> to get started.</p>
-                <input id="enroll-account-password" class="form-control" type="password" placeholder="{{i18n 'enrollAccountDialog.newPassword'}}" /><br>
-                <input id="enroll-account-password-again" class="form-control" type="password" placeholder="{{i18n 'enrollAccountDialog.newPasswordAgain'}}" /><br>
-                {{> _loginButtonsMessages}}
-              {{/with}}
+              {{#if user}}
+                {{#with user}}
+                  <p>
+                    {{profile.firstName}} {{profile.lastName}}, your hotel has partnered with PlusMore to allow you to control your stay on the go.
+                  </p>
+                  <ul>
+                    <li><p>Order in-room amenties!</p></li>
+                    <li><p>Make Primetime Reservations!</p></li>
+                  </ul>
+                  <p>Just choose a password for <strong>{{services.password.reset.email}}</strong> to get started.</p>
+                  <input id="enroll-account-password" class="form-control" type="password" placeholder="{{i18n 'enrollAccountDialog.newPassword'}}" />
+                  <input id="enroll-account-password-again" class="form-control" type="password" placeholder="{{i18n 'enrollAccountDialog.newPasswordAgain'}}" />
+                  {{> _loginButtonsMessages}}
+                {{/with}}
+              {{else}}
+                {{> codeUsed}}
+              {{/if}}
             {{else}}
               {{> spinner}}
             {{/if}}
           </div>
 
-          <div class="modal-footer">
-            <button class="btn btn-primary" id="login-buttons-enroll-account-button">
-              <!-- {{i18n 'enrollAccountDialog.submit'}} -->
-              Open PlusMore
-            </button>
-          </div>
+          {{#if Template.subscriptionsReady}}
+            <div class="modal-footer">
+              {{#if user}}
+                <button class="btn btn-primary" id="login-buttons-enroll-account-button">
+                  <!-- {{i18n 'enrollAccountDialog.submit'}} -->
+                  Open PlusMore
+                </button>
+              {{else}}
+                <button class="btn btn-default" data-dismiss="modal">
+                  <!-- {{i18n 'enrollAccountDialog.submit'}} -->
+                  Close
+                </button>
+              {{/if}}
+            </div>
+          {{/if}}
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dalog -->
     </div><!-- /.modal -->
   {{/if}}
+</template>
+
+<template name="codeUsed">
+  <p>Sorry, looks like this token has already been used. </p>
 </template>

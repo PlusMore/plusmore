@@ -74,7 +74,6 @@ sacha:spin@2.3.1
 service-configuration@1.0.4
 session@1.1.0
 sha@1.0.3
-smeevil:syntax-error-notifier@1.0.8
 spacebars@1.0.6
 spacebars-compiler@1.0.6
 srp@1.0.3
