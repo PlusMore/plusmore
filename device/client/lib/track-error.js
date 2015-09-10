@@ -7,14 +7,8 @@ Meteor.startup(function() {
     var fileName = errorEvent.filename;
     var line = errorEvent.lineno;
 
-    App.track('Client Error', {
-      "Error Message": message,
-      "Error FileName": fileName,
-      "Error Line Number": line
-    });
-
     var suppressErrorAlert = true;
-    // If you return true, then error alerts (like in older versions of 
+    // If you return true, then error alerts (like in older versions of
     // Internet Explorer) will be suppressed.
     return suppressErrorAlert;
   });

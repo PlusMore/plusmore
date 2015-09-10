@@ -20,7 +20,6 @@ Meteor.startup(function() {
     if (isIdle) {
 
       if (status === "connecting" || status === "waiting") {} else if (status === "connected") {
-        App.track("User Idle");
 
         $('#confirm-reservation').modal('hide');
         Session.set('reservation', null);
@@ -34,7 +33,6 @@ Meteor.startup(function() {
     } else {
       if (status === "connecting" || status === "waiting") {} else if (status === "offline") {
         Meteor.reconnect();
-        App.track("Tap To Resume");
       }
     }
   });
