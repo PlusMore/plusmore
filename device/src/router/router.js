@@ -11,11 +11,14 @@ Router.configure({
 // Filters
 
 var filters = {
-  scroll: function() {
+  onRun: function() {
     Meteor.setTimeout(function() {
       $('.main').animate({
         scrollTop: 0
       }, 400);
+    });
+    Meteor.setTimeout(function() {
+      analytics.page();
     });
     this.next();
   },
@@ -29,7 +32,7 @@ var filters = {
 // /client/layouts/router.js also adds an onRun hook to close the menu
 if (Meteor.isClient) {
   Router.onBeforeAction(filters.clearErrors);
-  Router.onRun(filters.scroll);
+  Router.onRun(filters.onRun);
 }
 
 // Routes

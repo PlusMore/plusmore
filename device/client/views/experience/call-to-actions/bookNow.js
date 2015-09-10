@@ -119,6 +119,7 @@ Template.bookNow.events({
 
 
       Session.set('loader', 'Requesting Reservation');
+
       Meteor.call('makeReservation', reservation, function(err, result) {
         if (err) {
           Errors.throw(err.message);
