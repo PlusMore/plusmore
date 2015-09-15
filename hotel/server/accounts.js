@@ -36,7 +36,7 @@ Accounts.emailTemplates.enrollAccount.text = function(user, url) {
 
   text += "Click here to get started with PlusMore:\n\n" + appUrl;
   if (hotel) {
-    text += "As always, feel free to reach out to us at any time if you have any additional questions. We look forward to serving you!\n\n"
+    text += "\n\nAs always, feel free to reach out to us at any time if you have any additional questions. We look forward to serving you!\n\n"
     text += "-" + hotel.name;
   }
 
