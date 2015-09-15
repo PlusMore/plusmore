@@ -29,7 +29,7 @@ Accounts.emailTemplates.enrollAccount.text = function(user, url) {
     text += "\t - Make various hotel requests like luggage pick-up or a wake up call\n"
     text += "\t - Learn about and book reservations at the city's hottest restaurants\n"
     text += "\t - Make table reservations at the most exclusive nightclubs\n"
-    text += "\t - Get some great sightseeing recommendations\n"
+    text += "\t - Get some great sightseeing recommendations\n\n"
   }
 
   appUrl += '#' + spliturl[1];
