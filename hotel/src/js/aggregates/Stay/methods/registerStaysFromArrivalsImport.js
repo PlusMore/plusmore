@@ -5,7 +5,7 @@ Meteor.methods({
     var hotelUtcOffset= hotel.utcOffset || -240;
 
     _.each(resArr, function(res) {
-      var startDateMoment = moment(res.ARRIVAL);
+      var startDateMoment = moment(res.ARRIVAL).startOf('day');
       var startDate = startDateMoment.toDate();
 
       var endDateMoment = moment(res.DEPARTURE);
