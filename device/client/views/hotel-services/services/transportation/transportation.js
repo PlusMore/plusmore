@@ -32,12 +32,6 @@ Template.transportation.events({
       tip: tip
     };
 
-    App.track('Hotel Service Request', {
-      "Requested At": new Date(),
-      "Request Date": request.date,
-      "Hotel Service": "Transportation"
-    });
-
     $(document).one('user-selected', function() {
       $(document).off('user-selected');
       $(document).off('cancel-user-selected');

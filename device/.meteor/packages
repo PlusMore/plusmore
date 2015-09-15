@@ -10,7 +10,6 @@ less
 email
 underscore
 jquery
-percolatestudio:percolatestudio-mixpanel
 mizzao:user-status
 natestrauser:animate-css
 lezed1:bootstrap-errors@0.3.1
@@ -49,3 +48,4 @@ dburles:google-maps
 browser-policy
 raix:eventemitter
 meteorhacks:cluster
+percolatestudio:segment.io

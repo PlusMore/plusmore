@@ -7,11 +7,6 @@ var checkIfStayHasExpired = function(time, stay) {
         return Errors.throw('Unable to end stay');
       }
 
-      App.track("Stay Over", {
-        "checkInDate": stay.checkInDate,
-        "checkoutDate": stay.checkoutDate
-      });
-
       if (LocalStore.get('kiosk')) {
         Meteor.logout();
       } else {

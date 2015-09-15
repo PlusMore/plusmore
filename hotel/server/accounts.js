@@ -1,22 +1,46 @@
 Accounts.emailTemplates.siteName = "PlusMore";
 Accounts.emailTemplates.from = "PlusMore <noreply@plusmoretablets.com>";
 Accounts.emailTemplates.enrollAccount.subject = function(user) {
-  return "Welcome to PlusMore, " + user.profile.firstName + "!";
+  var text = "";
+
+  if (Roles.userIsInRole(user, ['guest'])) {
+    var stay = Stays.findOne(user.stayId);
+    var hotel = Hotels.findOne(stay.hotelId);
+
+    text += "Welcome to " + hotel.name + ", ";
+  } else {
+    text += "Welcome to PlusMore, ";
+  }
+
+  return text + user.profile.firstName + "!";
 };
 Accounts.emailTemplates.enrollAccount.text = function(user, url) {
   var spliturl = url.split('/#');
-
-  debugger;
   var appUrl = Cluster.discovery.pickEndpoint('hotel');
+  var text = "Hi " + user.profile.firstName + ",\n\n";
 
   if (Roles.userIsInRole(user, ['guest'])) {
     appUrl = Cluster.discovery.pickEndpoint('onboard');
+    var stay = Stays.findOne(user.stayId);
+    var hotel = Hotels.findOne(stay.hotelId);
+    text += "Welcome to " +  hotel.name + "!\n\n";
+    text += "In order to serve your better, we've partnered with PlusMore, a digital concierge app based here in NYC.\n\n";
+    text += "By using the PlusMore app you can:\n\n"
+    text += "\t - Make various hotel requests like luggage pick-up or a wake up call\n"
+    text += "\t - Learn about and book reservations at the city's hottest restaurants\n"
+    text += "\t - Make table reservations at the most exclusive nightclubs\n"
+    text += "\t - Get some great sightseeing recommendations\n\n"
   }
 
   appUrl += '#' + spliturl[1];
 
-  return "To activate your account, simply click the link below:\n\n" +
-    appUrl;
+  text += "Click here to get started with PlusMore:\n\n" + appUrl;
+  if (hotel) {
+    text += "\n\nAs always, feel free to reach out to us at any time if you have any additional questions. We look forward to serving you!\n\n"
+    text += "-" + hotel.name;
+  }
+
+  return text;
 };
 
 Accounts.emailTemplates.verifyEmail.text = function(user, url) {

@@ -33,12 +33,6 @@ var handleRequestService = function(e, tmpl, requestButton) {
     tip: tip
   };
 
-  App.track('Hotel Service Request', {
-    "Requested At": new Date(),
-    "Request Date": request.date,
-    "Hotel Service": "Valet Services"
-  });
-
   $(document).one('user-selected', function() {
     $(document).off('user-selected');
     $(document).off('cancel-user-selected');

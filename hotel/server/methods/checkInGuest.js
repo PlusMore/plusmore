@@ -53,7 +53,7 @@ Meteor.methods({
 
       var userId = Accounts.createUser(accountOptions);
 
-      Accounts.sendEnrollmentEmail(userId, accountOptions.email);
+      var sendEnrollmentEmail = true;
 
       doc.guestId = userId;
     }
@@ -114,6 +114,12 @@ Meteor.methods({
         stayId: stayId
       }
     });
+
+    if (sendEnrollmentEmail && accountOptions) {
+      Meteor.defer(function() {
+        Accounts.sendEnrollmentEmail(userId, accountOptions.email);
+      });
+    }
 
     return room.name;
   }

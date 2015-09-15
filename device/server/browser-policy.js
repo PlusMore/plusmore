@@ -17,7 +17,8 @@ Meteor.startup(function() {
   ];
 
   var trustedBoth = [
-    '*.mxpnl.com',
+    'cdn.mxpnl.com',
+    'cdn.segment.io',
     '*.yelpcdn.com'
   ];
 
