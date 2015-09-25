@@ -54,3 +54,7 @@ start-ddp:
 tag:
 	git tag -a $(TAG) -m 'tagging release'
 	git push origin $(TAG)
+
+get-compose-data:
+	mongodump --host candidate.11.mongolayer.com:10410 --db imports -u plusmore -o /data/backup/plusmore-imports --excludeCollection system.users
+	mongorestore --db meteor --host 127.0.0.1 --port 3101 --drop /data/backup/plusmore-imports/imports
