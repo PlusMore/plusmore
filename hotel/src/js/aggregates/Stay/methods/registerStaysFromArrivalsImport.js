@@ -8,7 +8,7 @@ Meteor.methods({
 
     _.each(resArr, function(res) {
       var hotelArrivalMinutes = (hotel.settings && hotel.settings.arrivalMinutes) || 900;
-      var startDateMoment = moment(new Date(res.ARRIVAL)).utcOffset(hotelUtcOffset).startOf('day').add(hotelArrivalMinutes, 'minutes');
+      var startDateMoment = moment(new Date(res.ARRIVAL)).utcOffset(hotelUtcOffset).add(hotelArrivalMinutes, 'minutes');
       var startDate = startDateMoment._d;
 
       var hotelCheckoutMinutes = (hotel.settings && hotel.settings.departureMinutes) || 720;
