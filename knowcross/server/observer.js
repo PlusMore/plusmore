@@ -1,6 +1,6 @@
 // TODO: 
 // PAT: When we create an order we should put the knowcross request id in the order data, and if it is present, than poll knowcross to get current status information when viewed. 
-// dan: currently entering the id
+// dan: currently entering the id - need to do tracking on hotel app side?
 // USED for tracking: http://182.73.86.222:443/TritonActivityWeb/TritonActivity.aspx?ACTION=STATUS&USER=plusmore&pswd=82296&REQID=10516478
 // How do we handle errors ? When a request doesn't get sent or registered or receives an error, yet it gets added on our side?
 
