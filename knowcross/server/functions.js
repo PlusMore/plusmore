@@ -1,5 +1,6 @@
-hotelID='6FEjegHjX6Lq2YLYn';
-baseURL = 'http://training.knowcross.com/TritonActivityService/TritonActivity.aspx?ACTION=';
+baseURL = Meteor.settings.private.baseURL;
+loginOpts = Meteor.settings.private.loginOpts;
+hotelID = Meteor.settings.private.hotelID;
 
 urlToJSON = function(url){
   var tabletojson = Meteor.npmRequire('tabletojson');
@@ -7,24 +8,22 @@ urlToJSON = function(url){
   return tabletojson.convert(html);
 }
 
-//http://training.knowcross.com/TritonActivityService/TritonActivity.aspx?ACTION=LIST_CALL_DESCRIPTIONS&USER=admin&pswd=
 theMarkServiceType = function(serviceType) {
   switch (serviceType) {
       case 'bellService':
-          return "Luggage Handling";
+          return "812"; //Pick up luggages
           break;
       case 'houseKeeping':
-          return "Room to clean";
+          return "485"; //Room to clean
           break;
       case 'wakeUpCall':
-        // Nothing extra needed
-        return "Wake up call";
+        return "1"; // Courtesy call to guest //what is the proper service?
         break;
       case 'transportation':   
-          return "Transportation";
+          return "45"; //Taxi service
         break;
       case 'valetServices':
-          return "Valet Parking";
+          return "899"; // Other guest service center//what is the proper service?
         break;
       default:
         console.log('The type of service requested has not been configured');

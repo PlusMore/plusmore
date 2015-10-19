@@ -1,13 +1,12 @@
-//TODO: 
-// ACTION == STATUS, REQID == 
-// UPDATE REQ ID - currently getting "No guest checked in for this room" for all rooms so I am unable to test the response.
+// TODO: 
 // PAT: When we create an order we should put the knowcross request id in the order data, and if it is present, than poll knowcross to get current status information when viewed. 
+// dan: currently entering the id
+// USED for tracking: http://182.73.86.222:443/TritonActivityWeb/TritonActivity.aspx?ACTION=STATUS&USER=plusmore&pswd=82296&REQID=10516478
+// How do we handle errors ? When a request doesn't get sent or registered or receives an error, yet it gets added on our side?
 
 (function() {
 
     var initializing = true;
-
-    var loginOpts ='&USER=admin&pswd=';
 
     var remarksOpts='&REMARKS=';
 
@@ -18,15 +17,13 @@
                 // when we find a new order, we log to console for debugging. 
                 // console.log(request);
                 var room=Rooms.find({'hotelId':hotelID,'imported':true,'_id':request.roomId}).fetch()[0];
-                var roomId=room.name;
+                var roomId=room.tritonRoomId;
                 var serviceType=theMarkServiceType(request.service.type);
                 var remarks='date '+request.service.date;
 
                 if ( typeof request.service.tip != "undefined"){
                     remarks+=', tip '+request.service.tip;
                 }
-
-
 
                 if ( typeof request.service.options != "undefined"){
 

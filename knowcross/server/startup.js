@@ -1,11 +1,9 @@
 Meteor.startup(function () {
     
     if (Rooms.find({'hotelId':hotelID,imported:true}).count() === 0) {
-        //http://training.knowcross.com/TritonActivityService/TritonActivity.aspx?ACTION=LIST_LOCATIONS&USER=admin&pswd=
         // Import all rooms if the imported count is 0.    
-        console.log("IMPORTING ROOM LIST FOR hotel "+hotelID);
-        
-        var roomList=urlToJSON(baseURL+'LIST_LOCATIONS&USER=admin&pswd=');
+        console.log("IMPORTING ROOM LIST FOR hotel "+hotelID);        
+        var roomList=urlToJSON(baseURL+'LIST_LOCATIONS'+loginOpts);
 
         _.each(roomList[0], function(value, key) {
             if (key!==0) {
@@ -19,6 +17,7 @@ Meteor.startup(function () {
                     Rooms.insert({
                         hotelId: hotelID,
                         name: room,
+                        tritonRoomId: value[1],
                         imported: true
                     });
                     
