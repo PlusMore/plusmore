@@ -1,0 +1,7 @@
+{
+  "private": {
+    "hotelID": "6FEjegHjX6Lq2YLYn",
+    "baseURL": "http://training.knowcross.com/TritonActivityService/TritonActivity.aspx?ACTION=",
+    "loginOpts": "&USER=admin&pswd="
+  }
+}

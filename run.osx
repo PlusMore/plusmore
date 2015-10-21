@@ -37,10 +37,13 @@ end tell
 
 tell application "Safari"
     tell window 1
-	delay 60
+	delay 10
         set current tab to (make new tab with properties {URL:"http://localhost:3000"})
+	delay 10
         set current tab to (make new tab with properties {URL:"http://localhost:4000"})
+	delay 10
         set current tab to (make new tab with properties {URL:"http://localhost:5000"})
+	delay 10
     end tell
 end tell
 
