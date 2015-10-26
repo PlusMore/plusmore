@@ -6,8 +6,12 @@ Template.OrderDetailsModal.helpers({
     switch (this.service.type) {
       case 'transportation':
         return 'TransportationServiceDetails';
+      case 'maintenance':
+        return 'MaintenanceServiceDetails';
       case 'roomService':
         return 'RoomServiceDetails';
+      case 'houseKeeping':
+	return 'HouseKeepingServiceDetails';
       case 'valetServices':
         return 'ValetServiceDetails';
       default:

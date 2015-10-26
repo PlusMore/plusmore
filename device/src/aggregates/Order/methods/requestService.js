@@ -22,12 +22,26 @@ Schema.requestService = new SimpleSchema({
 
 var getTypeOptionsSimpleSchema = function(serviceType) {
   switch (serviceType) {
-
       case 'bellService':
-      case 'houseKeeping':
       case 'wakeUpCall':
         // Nothing extra needed
         return false;
+        break;
+      case 'houseKeeping':
+        return new SimpleSchema({
+          HouseKeepingRequest: {
+            type: String,
+            optional: true
+          }
+        });
+        break;
+      case 'maintenance':
+        return new SimpleSchema({
+          MaintenanceRequest: {
+            type: String,
+            optional: true
+          }
+        });
         break;
       case 'transportation':
         return new SimpleSchema({
@@ -113,7 +127,8 @@ Meteor.methods({
     }
 
     // ************ END VALIDATION **************
-
+    // console.log(serviceRequest);
+      
     // valid service
     var order = {
       type: 'service',

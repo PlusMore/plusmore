@@ -1,4 +1,4 @@
-Template.houseKeeping.rendered = function() {
+Template.maintenance.rendered = function() {
   // Convert all the links with the progress-button class to
   // actual buttons with progress meters.
   // You need to call this function once the page is loaded.
@@ -6,7 +6,7 @@ Template.houseKeeping.rendered = function() {
   $('.progress-button').progressInitialize();
 };
 
-Template.houseKeeping.events({
+Template.maintenance.events({
   'click #btn-request:not(.in-progress):not(.finished)': function(e, tmpl) {
     e.preventDefault();
 
@@ -27,8 +27,8 @@ Template.houseKeeping.events({
       date: reservationMoment.toDate(),
       zone: Session.get('zone'),
       options: {
-        HouseKeepingRequest: tmpl.$('[name=HouseKeepingRequest]').val()
-      },
+        MaintenanceRequest: tmpl.$('[name=MaintenanceRequest]').val()
+      },    
       tip: tip
     };
 

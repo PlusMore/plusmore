@@ -59,6 +59,8 @@ HotelServices.friendlyServiceType = function(serviceType) {
       return 'Valet Services';
     case 'roomService':
       return 'Room Service';
+    case 'maintenance':
+      return 'Maintenance';
     default:
       return undefined;
   }
