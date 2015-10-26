@@ -1,7 +1,30 @@
 {
+  "public": {
+    "googlemaps": "AIzaSyAqKHGXAUZYcxTHspvdWlxQ16xokLPEO-A",
+    "bgPhotoUrl": "https://www.filepicker.io/api/file/zUcd74YlSQCLj8PKmgO1",
+    "segment": "vAyJ5EyCxdB5DcKrPEsAefpgNZpdDg7I"
+  },
+  "apps": {
+    "admin": {
+      "url": "http://admin.plusmoretablets.com"
+    },
+    "device": {
+      "url": "http://device.plusmoretablets.com"
+    },
+    "hotel": {
+      "url": "http://hotel.plusmoretablets.com"
+    }
+  },
+  "kadira": {
+    "appId": "RsuoyAvFLCKWokzQe",
+    "appSecret": "c4ff264b-b68c-4525-8dbe-32ba5b2c8d86"
+  },
+  "cordova": {},
   "private": {
     "hotelID": "6FEjegHjX6Lq2YLYn",
     "baseURL": "http://182.73.86.222:443/TritonActivityWeb/TritonActivity.aspx?ACTION=",
     "loginOpts": "&USER=plusmore&pswd=82296"
-  } 
+  }
+
 }
+
