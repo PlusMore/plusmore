@@ -13,6 +13,7 @@ Meteor.startup(function() {
     '*.plusmoretablets.com',
     '*.plusmore.io',
     '*.yelp.com',
+    'file.myfontastic.com',
     '*.kadira.io'
   ];
 
