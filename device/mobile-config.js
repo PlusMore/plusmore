@@ -79,13 +79,6 @@ var trustedBoth = [
   '*.yelpcdn.com'
 ];
 
-_.each(trustedSecure, function(trustedDomain) {
-  accessRule(trustedDomain, false);
-});
-
-_.each(trustedBoth, function(trustedDomain) {
-  accessRule(trustedDomain, true);
-});
 
 var accessRule = function(domain, allowHttp) {
   if (allowHttp) {
@@ -101,3 +94,12 @@ var accessRule = function(domain, allowHttp) {
   var wssOrigin = "ws://" + domain;
   App.accessRule(wssOrigin);
 };
+
+trustedSecure.forEach(function(trustedDomain) {
+  accessRule(trustedDomain, false);
+});
+
+trustedBoth.forEach(function(trustedDomain) {
+  accessRule(trustedDomain, true);
+});
+
