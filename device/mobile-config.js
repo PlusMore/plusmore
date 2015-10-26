@@ -70,6 +70,7 @@ var trustedSecure = [
   '*.plusmoretablets.com',
   '*.plusmore.io',
   '*.yelp.com',
+  'file.myfontastic.com',
   '*.kadira.io'
 ];
 
@@ -100,6 +101,3 @@ var accessRule = function(domain, allowHttp) {
   var wssOrigin = "ws://" + domain;
   App.accessRule(wssOrigin);
 };
-
-
-
