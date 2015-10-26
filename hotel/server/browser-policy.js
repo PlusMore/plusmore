@@ -8,6 +8,7 @@ Meteor.startup(function() {
     '*.plusmore.io',
     '*.kadira.io',
     'fontastic.s3.amazonaws.com',
+    'file.myfontastic.com',
     'query.yahooapis.com'
   ];
 
