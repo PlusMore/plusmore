@@ -72,3 +72,11 @@ Template.houseKeeping.events({
 
   }
 });
+
+
+Template.houseKeeping.helpers({
+  hotelIsMark: function() {
+    if(Hotels.findOne().name==='The Mark Hotel') { return true; } else { return false; }
+  }
+});
+

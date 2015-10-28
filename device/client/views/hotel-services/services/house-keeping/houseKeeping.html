@@ -5,6 +5,7 @@
         <div class="modal-header">
           <h3 class="modal-title">
             House Keeping
+	
             <small>
               Available
               {{#if startTime}}
@@ -26,7 +27,10 @@
                 <fieldset>
                   {{> selectGeneric}}
                 </fieldset>
-                {{> selectHouseKeepingRequest}}
+
+	        {{#if hotelIsMark}}
+        	        {{> selectHouseKeepingRequest}}
+		{{/if}}
 
               </form>
             </div>

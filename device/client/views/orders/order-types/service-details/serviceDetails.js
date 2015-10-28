@@ -32,6 +32,10 @@ Template.serviceDetails.helpers({
         return 'roomServiceDetails';
       case 'valetServices': 
         return 'valetServiceDetails';
+      case 'maintenance':
+        return 'maintenanceServiceDetails';
+      case 'houseKeeping':
+	return 'houseKeepingServiceDetails';
       default:
         return '';
     }

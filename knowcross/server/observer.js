@@ -18,7 +18,8 @@
                 // console.log(request);
                 var room=Rooms.find({'hotelId':hotelID,'imported':true,'_id':request.roomId}).fetch()[0];
                 var roomId=room.tritonRoomId;
-                var serviceType=theMarkServiceType(request.service.type);
+                console.log(request);
+                var serviceType=theMarkServiceType(request.service);
                 var remarks='date '+request.service.date;
 
                 if ( typeof request.service.tip != "undefined"){
