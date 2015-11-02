@@ -32,7 +32,7 @@ Accounts.emailTemplates.enrollAccount.text = function(user, url) {
     text += "\t - Get some great sightseeing recommendations\n\n"
   }
 
-  appUrl += '#' + spliturl[1];
+  appUrl += '/#' + spliturl[1];
 
   text += "Click here to get started with PlusMore:\n\n" + appUrl;
   if (hotel) {
