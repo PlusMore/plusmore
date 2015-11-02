@@ -53,6 +53,8 @@ build:
 	SUBDOMAIN=$(SUBDOMAIN) \
 	VERSION=$(VERSION) \
 	meteor build ~/cordova-builds/$(APP_ENV) --server=https://$(SUBDOMAIN).plusmoretablets.com
+	/usr/libexec/PlistBuddy -c "Add :NSAppTransportSecurity dict" ~/cordova-builds/$(APP_ENV)/ios/project/PlusMore/PlusMore-Info.plist
+	/usr/libexec/PlistBuddy -c "Add :NSAppTransportSecurity:NSAllowsArbitraryLoads bool YES"  ~/cordova-builds/$(APP_ENV)/ios/project/PlusMore/PlusMore-Info.plist
 	cd ~/cordova-builds/$(APP_ENV)/android/
 	jarsigner -digestalg SHA1 ~/cordova-builds/$(APP_ENV)/android/unaligned.apk $(SUBDOMAIN)
 	~/.meteor/android_bundle/android-sdk/build-tools/20.0.0/zipalign 4 ~/cordova-builds/$(APP_ENV)/android/unaligned.apk ~/cordova-builds/$(APP_ENV)/android/$(SUBDOMAIN)-$(VERSION).apk
