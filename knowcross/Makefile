@@ -8,7 +8,7 @@ CLUSTER_DISCOVERY_URL?=mongodb://localhost:27017/cluster
 CLUSTER_SERVICE?=knowcross
 CLUSTER_PUBLIC_SERVICES="hotel"
 TAG?=
-SETTINGS?=/Users/danvoinea/Development/galaxy
+SETTINGS?=/Users/danvoinea/Development/galaxy/knowcross
 
 start:
 	NODE_OPTIONS=$(NODE_OPTIONS) \
@@ -20,9 +20,9 @@ start:
 	meteor -p $(PORT) --settings $(SETTINGS)/config/$(APP_ENV)/settings.json
 
 deploy-qa:
-	DEPLOY_HOSTNAME=galaxy.meteor.com meteor --settings $(SETTINGS)config/qa/settings.json deploy qa-knowcross.plusmoretablets.com
+	DEPLOY_HOSTNAME=galaxy.meteor.com meteor --settings $(SETTINGS)/config/qa/settings.json deploy qa-knowcross.plusmoretablets.com
 deploy:
-	DEPLOY_HOSTNAME=galaxy.meteor.com meteor --settings $(SETTINGS)config/production/settings.json deploy knowcross.plusmoretablets.com
+	DEPLOY_HOSTNAME=galaxy.meteor.com meteor --settings $(SETTINGS)/config/production/settings.json deploy knowcross.plusmoretablets.com
 
 debug:
 	NODE_OPTIONS='--debug' \

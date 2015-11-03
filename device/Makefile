@@ -11,7 +11,7 @@ CLUSTER_SERVICE?=device
 CLUSTER_PUBLIC_SERVICES="hotel"
 SUBDOMAIN?=dev-device
 TAG?=
-SETTINGS?=/Users/danvoinea/Development/galaxy
+SETTINGS?=/Users/danvoinea/Development/galaxy/device
 
 start:
 	NODE_OPTIONS=$(NODE_OPTIONS) \

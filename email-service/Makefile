@@ -5,7 +5,7 @@ PORT?=3002
 CLUSTER_DISCOVERY_URL?=mongodb://localhost:27017/cluster
 CLUSTER_SERVICE?=emailService
 TAG?=
-SETTINGS?=/Users/danvoinea/Development/galaxy
+SETTINGS?=/Users/danvoinea/Development/galaxy/email-service
 
 start:
 	NODE_OPTIONS=$(NODE_OPTIONS) \

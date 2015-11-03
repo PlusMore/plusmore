@@ -15,7 +15,7 @@ MONGO_URL?=mongodb://localhost:27017/plusmore
 MONGO_OPLOG_URL?=mongodb://localhost:27017/local
 CLUSTER_DISCOVERY_URL?=mongodb://localhost:27017/cluster
 CLUSTER_SERVICE?=onboard
-SETTINGS?=/Users/danvoinea/Development/galaxy
+SETTINGS?=/Users/danvoinea/Development/galaxy/onboard
 
 start:
 	NODE_OPTIONS=$(NODE_OPTIONS) \
@@ -42,9 +42,6 @@ debug:
 	CLUSTER_DISCOVERY_URL=$(CLUSTER_DISCOVERY_URL) \
 	CLUSTER_SERVICE=$(CLUSTER_SERVICE) \
 	meteor debug -p $(PORT) --settings $(SETTINGS)/config/$(APP_ENV)/settings.json --mobile-server $(HOST):$(PORT) $(APP_OPTIONS)
-
-deploy:
-	meteor deploy https://$(APP_NAME).meteor.com --settings $(SETTINGS)/config/$(APP_ENV)/settings.json
 
 mongo:
 	meteor mongo

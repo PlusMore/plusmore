@@ -7,7 +7,7 @@ MONGO_OPLOG_URL?=mongodb://localhost:27017/local
 CLUSTER_DISCOVERY_URL?=mongodb://localhost:27017/cluster
 CLUSTER_SERVICE?=admin
 TAG?=
-SETTINGS?=/Users/danvoinea/Development/galaxy
+SETTINGS?=/Users/danvoinea/Development/galaxy/admin
 
 
 start:

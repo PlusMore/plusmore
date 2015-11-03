@@ -6,7 +6,7 @@ CLUSTER_DISCOVERY_URL?=mongodb://localhost:27017/cluster
 CLUSTER_SERVICE?=imports
 TAG?=
 SERVER=$(shell curl ipecho.net/plain)
-SETTINGS?=/Users/danvoinea/Development/galaxy
+SETTINGS?=/Users/danvoinea/Development/galaxy/imports
 
 start:
 	NODE_OPTIONS=$(NODE_OPTIONS) \

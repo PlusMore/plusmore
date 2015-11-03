@@ -8,7 +8,7 @@ CLUSTER_DISCOVERY_URL?=mongodb://localhost:27017/cluster
 CLUSTER_SERVICE?=hotel
 CLUSTER_PUBLIC_SERVICES="imports"
 TAG?=
-SETTINGS?=/Users/danvoinea/Development/galaxy
+SETTINGS?=/Users/danvoinea/Development/galaxy/hotel
 
 start:
 	NODE_OPTIONS=$(NODE_OPTIONS) \
