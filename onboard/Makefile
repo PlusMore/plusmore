@@ -15,6 +15,7 @@ MONGO_URL?=mongodb://localhost:27017/plusmore
 MONGO_OPLOG_URL?=mongodb://localhost:27017/local
 CLUSTER_DISCOVERY_URL?=mongodb://localhost:27017/cluster
 CLUSTER_SERVICE?=onboard
+SETTINGS?=/Users/danvoinea/Development/galaxy
 
 start:
 	NODE_OPTIONS=$(NODE_OPTIONS) \
@@ -24,7 +25,13 @@ start:
 	MONGO_OPLOG_URL=$(MONGO_OPLOG_URL) \
 	CLUSTER_DISCOVERY_URL=$(CLUSTER_DISCOVERY_URL) \
 	CLUSTER_SERVICE=$(CLUSTER_SERVICE) \
-	meteor -p $(PORT) --settings ./config/$(APP_ENV)/settings.json --mobile-server $(HOST):$(PORT) $(APP_OPTIONS)
+	meteor -p $(PORT) --settings $(SETTINGS)/config/$(APP_ENV)/settings.json --mobile-server $(HOST):$(PORT) $(APP_OPTIONS)
+
+
+deploy-qa:
+	DEPLOY_HOSTNAME=galaxy.meteor.com meteor --settings $(SETTINGS)/config/qa/settings.json deploy qa-open.plusmoretablets.com
+deploy:
+	DEPLOY_HOSTNAME=galaxy.meteor.com meteor --settings $(SETTINGS)/config/production/settings.json deploy open.plusmoretablets.com
 
 debug:
 	NODE_OPTIONS='--debug' \
@@ -34,10 +41,10 @@ debug:
 	MONGO_OPLOG_URL=$(MONGO_OPLOG_URL) \
 	CLUSTER_DISCOVERY_URL=$(CLUSTER_DISCOVERY_URL) \
 	CLUSTER_SERVICE=$(CLUSTER_SERVICE) \
-	meteor debug -p $(PORT) --settings ./config/$(APP_ENV)/settings.json --mobile-server $(HOST):$(PORT) $(APP_OPTIONS)
+	meteor debug -p $(PORT) --settings $(SETTINGS)/config/$(APP_ENV)/settings.json --mobile-server $(HOST):$(PORT) $(APP_OPTIONS)
 
 deploy:
-	meteor deploy https://$(APP_NAME).meteor.com --settings ./config/$(APP_ENV)/settings.json
+	meteor deploy https://$(APP_NAME).meteor.com --settings $(SETTINGS)/config/$(APP_ENV)/settings.json
 
 mongo:
 	meteor mongo
@@ -51,7 +58,7 @@ start-prod:
 	MONGO_OPLOG_URL=$(MONGO_OPLOG_URL) \
 	CLUSTER_DISCOVERY_URL=$(CLUSTER_DISCOVERY_URL) \
 	CLUSTER_SERVICE=$(CLUSTER_SERVICE) \
-	meteor -p $(PORT) --production --settings ./config/$(APP_ENV)/settings.json
+	meteor -p $(PORT) --production --settings $(SETTINGS)/config/$(APP_ENV)/settings.json
 
 tag:
 	git tag -a $(TAG) -m 'tagging release'

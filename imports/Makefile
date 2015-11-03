@@ -6,13 +6,19 @@ CLUSTER_DISCOVERY_URL?=mongodb://localhost:27017/cluster
 CLUSTER_SERVICE?=imports
 TAG?=
 SERVER=$(shell curl ipecho.net/plain)
+SETTINGS?=/Users/danvoinea/Development/galaxy
 
 start:
 	NODE_OPTIONS=$(NODE_OPTIONS) \
 	CLUSTER_DISCOVERY_URL=$(CLUSTER_DISCOVERY_URL) \
 	CLUSTER_SERVICE=$(CLUSTER_SERVICE) \
 	CLUSTER_PUBLIC_SERVICES=$(CLUSTER_PUBLIC_SERVICES) \
-	meteor -p $(PORT) --settings ./config/$(APP_ENV)/settings.json
+	meteor -p $(PORT) --settings $(SETTINGS)/config/$(APP_ENV)/settings.json
+
+deploy-qa:
+	DEPLOY_HOSTNAME=galaxy.meteor.com meteor --settings $(SETTINGS)/config/qa/settings.json deploy qa-imports.plusmoretablets.com
+deploy:
+	DEPLOY_HOSTNAME=galaxy.meteor.com meteor --settings $(SETTINGS)/config/production/settings.json deploy imports.plusmoretablets.com
 
 start-public:
 	NODE_OPTIONS=$(NODE_OPTIONS) \
@@ -20,7 +26,7 @@ start-public:
 	CLUSTER_SERVICE=$(CLUSTER_SERVICE) \
 	CLUSTER_PUBLIC_SERVICES=$(CLUSTER_PUBLIC_SERVICES) \
 	SERVER=$(SERVER) \
-	meteor -p $(PORT) --settings ./config/$(APP_ENV)/settings.json --mobile-server $(SERVER):$(PORT)
+	meteor -p $(PORT) --settings $(SETTINGS)/config/$(APP_ENV)/settings.json --mobile-server $(SERVER):$(PORT)
 
 debug-public:
 	NODE_OPTIONS='--debug' \
@@ -28,21 +34,21 @@ debug-public:
 	CLUSTER_SERVICE=$(CLUSTER_SERVICE) \
 	CLUSTER_PUBLIC_SERVICES=$(CLUSTER_PUBLIC_SERVICES) \
 	SERVER=$(SERVER) \
-	meteor debug -p $(PORT) --settings ./config/$(APP_ENV)/settings.json --mobile-server $(SERVER):$(PORT)
+	meteor debug -p $(PORT) --settings $(SETTINGS)/config/$(APP_ENV)/settings.json --mobile-server $(SERVER):$(PORT)
 
 debug:
 	NODE_OPTIONS='--debug' \
 	CLUSTER_DISCOVERY_URL=$(CLUSTER_DISCOVERY_URL) \
 	CLUSTER_SERVICE=$(CLUSTER_SERVICE) \
 	CLUSTER_PUBLIC_SERVICES=$(CLUSTER_PUBLIC_SERVICES) \
-	meteor debug -p $(PORT) --settings ./config/$(APP_ENV)/settings.json
+	meteor debug -p $(PORT) --settings $(SETTINGS)/config/$(APP_ENV)/settings.json
 
 start-prod:
 	NODE_OPTIONS=$(NODE_OPTIONS) \
 	CLUSTER_DISCOVERY_URL=$(CLUSTER_DISCOVERY_URL) \
 	CLUSTER_SERVICE=$(CLUSTER_SERVICE) \
 	CLUSTER_PUBLIC_SERVICES=$(CLUSTER_PUBLIC_SERVICES) \
-	meteor -p $(PORT) --production --settings ./config/production/settings.json
+	meteor -p $(PORT) --production --settings $(SETTINGS)/config/production/settings.json
 
 ddp:
 	ddp-analyzer-proxy

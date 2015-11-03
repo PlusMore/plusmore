@@ -11,6 +11,7 @@ CLUSTER_SERVICE?=device
 CLUSTER_PUBLIC_SERVICES="hotel"
 SUBDOMAIN?=dev-device
 TAG?=
+SETTINGS?=/Users/danvoinea/Development/galaxy
 
 start:
 	NODE_OPTIONS=$(NODE_OPTIONS) \
@@ -19,7 +20,12 @@ start:
 	CLUSTER_DISCOVERY_URL=$(CLUSTER_DISCOVERY_URL) \
 	CLUSTER_SERVICE=$(CLUSTER_SERVICE) \
 	CLUSTER_PUBLIC_SERVICES=$(CLUSTER_PUBLIC_SERVICES) \
-	meteor -p $(PORT) --settings ./config/$(APP_ENV)/settings.json --mobile-server $(HOST):$(PORT) $(APP_OPTIONS)
+	meteor -p $(PORT) --settings $(SETTINGS)/config/$(APP_ENV)/settings.json --mobile-server $(HOST):$(PORT) $(APP_OPTIONS)
+
+deploy-qa:
+	DEPLOY_HOSTNAME=galaxy.meteor.com meteor --settings $(SETTINGS)/config/qa/settings.json deploy qa-device.plusmoretablets.com
+deploy:
+	DEPLOY_HOSTNAME=galaxy.meteor.com meteor --settings $(SETTINGS)/config/production/settings.json deploy device.plusmoretablets.com
 
 ios:
 	NODE_OPTIONS=$(NODE_OPTIONS) \
@@ -28,7 +34,7 @@ ios:
 	CLUSTER_DISCOVERY_URL=$(CLUSTER_DISCOVERY_URL) \
 	CLUSTER_SERVICE=$(CLUSTER_SERVICE) \
 	CLUSTER_PUBLIC_SERVICES=$(CLUSTER_PUBLIC_SERVICES) \
-	meteor run --settings ./config/$(APP_ENV)/settings.json ios -p $(PORT) $(APP_OPTIONS)
+	meteor run --settings $(SETTINGS)/config/$(APP_ENV)/settings.json ios -p $(PORT) $(APP_OPTIONS)
 
 android:
 	NODE_OPTIONS=$(NODE_OPTIONS) \
@@ -36,7 +42,7 @@ android:
 	MONGO_OPLOG_URL=$(MONGO_OPLOG_URL) \
 	CLUSTER_DISCOVERY_URL=$(CLUSTER_DISCOVERY_URL) \
 	CLUSTER_SERVICE=$(CLUSTER_SERVICE) \
-	meteor run --settings ./config/$(APP_ENV)/settings.json android -p $(PORT) $(APP_OPTIONS)
+	meteor run --settings $(SETTINGS)/config/$(APP_ENV)/settings.json android -p $(PORT) $(APP_OPTIONS)
 
 android-device:
 	NODE_OPTIONS=$(NODE_OPTIONS) \
@@ -45,7 +51,7 @@ android-device:
 	CLUSTER_DISCOVERY_URL=$(CLUSTER_DISCOVERY_URL) \
 	CLUSTER_SERVICE=$(CLUSTER_SERVICE) \
 	CLUSTER_PUBLIC_SERVICES=$(CLUSTER_PUBLIC_SERVICES) \
-	meteor run --settings ./config/$(APP_ENV)/settings.json android-device -p $(PORT) --mobile-server $(HOST):$(PORT) $(APP_OPTIONS)
+	meteor run --settings $(SETTINGS)/config/$(APP_ENV)/settings.json android-device -p $(PORT) --mobile-server $(HOST):$(PORT) $(APP_OPTIONS)
 
 build:
 	rm -rf ~/cordova-builds/$(APP_ENV)
@@ -67,7 +73,7 @@ ios-device:
 	CLUSTER_DISCOVERY_URL=$(CLUSTER_DISCOVERY_URL) \
 	CLUSTER_SERVICE=$(CLUSTER_SERVICE) \
 	CLUSTER_PUBLIC_SERVICES=$(CLUSTER_PUBLIC_SERVICES) \
-	meteor run --settings ./config/$(APP_ENV)/settings.json ios-device -p $(PORT) --mobile-server $(HOST):$(PORT) $(APP_OPTIONS)
+	meteor run --settings $(SETTINGS)/config/$(APP_ENV)/settings.json ios-device -p $(PORT) --mobile-server $(HOST):$(PORT) $(APP_OPTIONS)
 
 all-platforms:
 	NODE_OPTIONS=$(NODE_OPTIONS) \
@@ -76,7 +82,7 @@ all-platforms:
 	CLUSTER_DISCOVERY_URL=$(CLUSTER_DISCOVERY_URL) \
 	CLUSTER_SERVICE=$(CLUSTER_SERVICE) \
 	CLUSTER_PUBLIC_SERVICES=$(CLUSTER_PUBLIC_SERVICES) \
-	meteor run --settings ./config/$(APP_ENV)/settings.json ios-device android-device -p $(PORT) --mobile-server $(HOST):$(PORT) $(APP_OPTIONS)
+	meteor run --settings $(SETTINGS)/config/$(APP_ENV)/settings.json ios-device android-device -p $(PORT) --mobile-server $(HOST):$(PORT) $(APP_OPTIONS)
 
 debug:
 	NODE_OPTIONS='--debug' \
@@ -85,7 +91,7 @@ debug:
 	CLUSTER_DISCOVERY_URL=$(CLUSTER_DISCOVERY_URL) \
 	CLUSTER_SERVICE=$(CLUSTER_SERVICE) \
 	CLUSTER_PUBLIC_SERVICES=$(CLUSTER_PUBLIC_SERVICES) \
-	meteor debug -p $(PORT) --settings ./config/$(APP_ENV)/settings.json
+	meteor debug -p $(PORT) --settings $(SETTINGS)/config/$(APP_ENV)/settings.json
 
 start-prod:
 	NODE_OPTIONS=$(NODE_OPTIONS) \
@@ -94,7 +100,7 @@ start-prod:
 	CLUSTER_DISCOVERY_URL=$(CLUSTER_DISCOVERY_URL) \
 	CLUSTER_SERVICE=$(CLUSTER_SERVICE) \
 	CLUSTER_PUBLIC_SERVICES=$(CLUSTER_PUBLIC_SERVICES) \
-	meteor -p $(PORT) --production --settings ./config/$(APP_ENV)/settings.json
+	meteor -p $(PORT) --production --settings $(SETTINGS)/config/$(APP_ENV)/settings.json
 
 ddp:
 	ddp-analyzer-proxy

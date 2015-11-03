@@ -8,6 +8,7 @@ CLUSTER_DISCOVERY_URL?=mongodb://localhost:27017/cluster
 CLUSTER_SERVICE?=knowcross
 CLUSTER_PUBLIC_SERVICES="hotel"
 TAG?=
+SETTINGS?=/Users/danvoinea/Development/galaxy
 
 start:
 	NODE_OPTIONS=$(NODE_OPTIONS) \
@@ -16,7 +17,12 @@ start:
 	CLUSTER_DISCOVERY_URL=$(CLUSTER_DISCOVERY_URL) \
 	CLUSTER_SERVICE=$(CLUSTER_SERVICE) \
 	CLUSTER_PUBLIC_SERVICES=$(CLUSTER_PUBLIC_SERVICES) \
-	meteor -p $(PORT) --settings ./config/$(APP_ENV)/settings.json
+	meteor -p $(PORT) --settings $(SETTINGS)/config/$(APP_ENV)/settings.json
+
+deploy-qa:
+	DEPLOY_HOSTNAME=galaxy.meteor.com meteor --settings $(SETTINGS)config/qa/settings.json deploy qa-knowcross.plusmoretablets.com
+deploy:
+	DEPLOY_HOSTNAME=galaxy.meteor.com meteor --settings $(SETTINGS)config/production/settings.json deploy knowcross.plusmoretablets.com
 
 debug:
 	NODE_OPTIONS='--debug' \
@@ -25,7 +31,7 @@ debug:
 	CLUSTER_DISCOVERY_URL=$(CLUSTER_DISCOVERY_URL) \
 	CLUSTER_SERVICE=$(CLUSTER_SERVICE) \
 	CLUSTER_PUBLIC_SERVICES=$(CLUSTER_PUBLIC_SERVICES) \
-	meteor debug -p $(PORT) --settings ./config/$(APP_ENV)/settings.json
+	meteor debug -p $(PORT) --settings $(SETTINGS)/config/$(APP_ENV)/settings.json
 
 start-prod:
 	NODE_OPTIONS=$(NODE_OPTIONS) \
@@ -34,7 +40,7 @@ start-prod:
 	CLUSTER_DISCOVERY_URL=$(CLUSTER_DISCOVERY_URL) \
 	CLUSTER_SERVICE=$(CLUSTER_SERVICE) \
 	CLUSTER_PUBLIC_SERVICES=$(CLUSTER_PUBLIC_SERVICES) \
-	meteor -p $(PORT) --production --settings ./config/$(APP_ENV)/settings.json
+	meteor -p $(PORT) --production --settings $(SETTINGS)/config/$(APP_ENV)/settings.json
 
 ddp:
 	ddp-analyzer-proxy
