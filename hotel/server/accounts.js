@@ -15,8 +15,10 @@ Accounts.emailTemplates.enrollAccount.subject = function(user) {
   return text + user.profile.firstName + "!";
 };
 Accounts.emailTemplates.enrollAccount.text = function(user, url) {
-  var spliturl = url.split('/#');
+  var spliturl = url.split('/#'); 
+
   var appUrl = Cluster.discovery.pickEndpoint('hotel');
+
   var text = "Hi " + user.profile.firstName + ",\n\n";
 
   if (Roles.userIsInRole(user, ['guest'])) {
