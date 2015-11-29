@@ -1,0 +1,23 @@
+<template name="stayLoginButtons">
+
+    <form id="login-form-room" action="action">
+    <li id="login-dropdown-list" class="dropdown">
+
+
+        <a class="dropdown-toggle" data-toggle="dropdown">Sign in / Join <b class="caret"></b></a>
+        <div class="dropdown-menu">
+          {{#if errorMessage}}
+            <div class="alert alert-danger">{{errorMessage}}</div>
+          {{/if}}
+
+            <input id="login-firstName" name="firstName" placeholder="First Name" class="form-control">
+            <input id="login-lastName"  name="lastName" placeholder="Last Name" class="form-control">
+            <input id="login-roomNumber" name="roomNumber"  placeholder="Room Number" class="form-control">
+
+            <button type="button" class="btn btn-primary col-xs-12 col-sm-12" id="loginRoom">Sign In</button>
+
+        </div>
+    </li>
+    </form>
+
+</template>
