@@ -40,7 +40,7 @@ Template.stayLoginButtons.events({
         lastName = t.$("form#login-form-room input[name=lastName]").val(),
         roomNumber = t.$("form#login-form-room input[name=roomNumber]").val();
 
-        var loginRequest = {firstName:firstName,lastName: lastName,roomNumber: roomNumber};
+        var loginRequest = {firstName:firstName.trim(),lastName: lastName.trim(),roomNumber: roomNumber.trim()};
 
         if(!loginRequest.firstName || !loginRequest.lastName || !loginRequest.roomNumber) {
           t.lastError.set("Missing Parameter");

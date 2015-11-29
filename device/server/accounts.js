@@ -6,7 +6,10 @@ Accounts.registerLoginHandler(function(loginRequest) {
   }
 
   var userId = null;
-  var user = Meteor.users.find({'profile.firstName':loginRequest.firstName, 'profile.lastName':loginRequest.lastName});
+  var user = Meteor.users.find({
+    'profile.firstName':{$regex : new RegExp(loginRequest.firstName, "i") },
+    'profile.lastName':{$regex : new RegExp(loginRequest.lastName, "i") }
+  });
 
   user.forEach(function(doc){
     var stay = Stays.findOne({'guestId':doc._id,$text: { $search: loginRequest.roomNumber }});
