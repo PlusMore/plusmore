@@ -1,23 +1,45 @@
 <template name="stayLoginButtons">
 
-    <form id="login-form-room" action="action">
-    <li id="login-dropdown-list" class="dropdown">
 
+        <div id="selectLogin">
+  {{#autoForm schema=myLoginSchema id='loginSchema'}}
+    <div class="modal-header">
+      <h2 class="modal-title animated-fadeInRight">
+        <h2 class="modal-title animated fadeInRight">Guest Verification</h2>
+      </h2>
+    </div>
+    <div class="modal-body">
+      <div class="row animated fadeInRight">
 
-        <a class="dropdown-toggle" data-toggle="dropdown">Sign in / Join <b class="caret"></b></a>
-        <div class="dropdown-menu">
-          {{#if errorMessage}}
-            <div class="alert alert-danger">{{errorMessage}}</div>
-          {{/if}}
+        {{#if hasLoginError}}
+          <div class="col-xs-12 col-sm-12 has-error animated fadeInDown">
+            <span class="help-block">{{getCustomLoginError}}</span>
+          </div>
+        {{/if}}
 
-            <input id="login-firstName" name="firstName" placeholder="First Name" class="form-control">
-            <input id="login-lastName"  name="lastName" placeholder="Last Name" class="form-control">
-            <input id="login-roomNumber" name="roomNumber"  placeholder="Room Number" class="form-control">
-
-            <button type="button" class="btn btn-primary col-xs-12 col-sm-12" id="loginRoom">Sign In</button>
-
+        <div class="col-xs-12 col-sm-6">
+          {{> afQuickField name='firstName'}}
         </div>
-    </li>
-    </form>
+        <div class="col-xs-12 col-sm-6">
+          {{> afQuickField name='lastName'}}
+        </div>
+          <div class="clearfix"></div>
+        <div class="col-xs-12 col-sm-5">
+          {{> afQuickField name='roomNumber'}}
+        </div>
+        <div class="col-xs-12 col-sm-1 form-group or">
+            <label class="control-label">OR</label>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          {{> afQuickField name='checkoutDate'}}
+        </div>
+
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type='submit' id='btn-step-one' class="btn btn-default animated fadeInRight">Sign in</button>
+    </div>
+  {{/autoForm}}
+        </div>
 
 </template>

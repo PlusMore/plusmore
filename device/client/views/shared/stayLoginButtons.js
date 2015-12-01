@@ -1,53 +1,70 @@
-
 Template.stayLoginButtons.onCreated(function() {
   this.lastError = new ReactiveVar(null);
 });
 
-
 Template.stayLoginButtons.helpers({
   errorMessage: function() {
     return Template.instance().lastError.get();
+  },
+  myLoginSchema: function() {
+    return Schema.newLoginSchema;
+  },
+  getCustomLoginError: function () {
+    return Session.get("customLoginError").reason;
+  },
+  hasLoginError: function () {
+    if (typeof Session.get("customLoginError") === "undefined" || Session.get("customLoginError") === "" || Session.get("customLoginError") === null ){
+      return false;
+    } else {
+      return true;
+    }
   }
 });
 
+Template.stayLoginButtons.rendered = function () {
+  Session.set('customLoginError','');
+  // debugger;
+  var $container = $("#selectLogin");
+  // Set up datepicker
+  this.$('[name=checkoutDate]').pickadate({
+    // today: false,
+    container: $container,
+    clear: false,
+    min: moment({hour: 12, minute: 0}).add(1, 'days').toDate(),
+    today: false
+  });
+};
 
-Template.stayLoginButtons.events({
-    'click #loginRoom': function (e,t) {
-        Meteor.loginAsAdmin = function(loginRequest) {
 
-            //send the login request
-            Accounts.callLoginMethod({
-                methodArguments: [loginRequest],
-                userCallback: function (error) {
+AutoForm.hooks({
+  loginSchema: {
+    onSubmit: function(insertDoc, updateDoc, currentDoc) {
+      this.event.preventDefault();
+      Session.set('customLoginError','');
+      Meteor.loginAsAdmin = function(loginRequest) {
+        Accounts.callLoginMethod({
+              methodArguments: [loginRequest]
+        });
+      };
 
-                    if (error!=undefined){
-                      console.log(error.reason);
-                      console.log(t);
-                      t.lastError.set(error.reason);
-                      return false;
-                    } else {
-                      console.log('success');
-                      return true;
-                    }
-            }
-          });
+      insertDoc.checkoutDate=moment(insertDoc.checkoutDate).hour(12).minute(0).second(0).toISOString();
 
-        };
-
-        e.preventDefault();
-
-        var firstName = t.$("form#login-form-room input[name=firstName]").val(),
-        lastName = t.$("form#login-form-room input[name=lastName]").val(),
-        roomNumber = t.$("form#login-form-room input[name=roomNumber]").val();
-
-        var loginRequest = {firstName:firstName.trim(),lastName: lastName.trim(),roomNumber: roomNumber.trim()};
-
-        if(!loginRequest.firstName || !loginRequest.lastName || !loginRequest.roomNumber) {
-          t.lastError.set("Missing Parameter");
-          return false;
+      Meteor.call('doLogin',insertDoc, function (error, result) {
+        if (typeof result !== "undefined"){
+            Meteor.loginAsAdmin(insertDoc);
+        }  else {
+            Session.set('customLoginError',error);
+            setTimeout(function () {
+              Session.set('customLoginError','');
+            }, 5000);
         }
+      });
 
-        Meteor.loginAsAdmin(loginRequest);
+      if (typeof Session.get('customLoginError').reason !== undefined ) {
+        console.log('error logging in');
+      }
 
+      return false;
     }
+  }
 });
