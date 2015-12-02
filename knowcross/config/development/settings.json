@@ -1,7 +1,7 @@
 {
   "private": {
     "hotelID": "6FEjegHjX6Lq2YLYn",
-    "baseURL": "http://182.73.86.222:443/TritonActivityWeb/TritonActivity.aspx?ACTION=",
-    "loginOpts": "&USER=plusmore&pswd=82296"
-  } 
+    "baseURL": "https://mobile-eu.tritonsuite.com/TritonActivityWebtmny/TritonActivity.aspx?ACTION=",
+    "loginOpts": "&USER=plusmore&PSWD=plusmore"
+  }
 }
