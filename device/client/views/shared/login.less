@@ -1,42 +1,47 @@
 @import '/client/style/imports.import.less';
-
-#login-form-room{
+#login-form-room {
   .error {
-    color: red;font-weight: bold;
+    color: red;
+    font-weight: bold;
   }
+}
+#login {
+ h1 {
+   margin-top:30px;
+ }
 }
 #selectLogin {
   background-color: rgba(0, 0, 0, 0.85098);
   border-radius: 4px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-
- .modal-title { font-size:26px;}
- .or { padding-left: 0;}
- div.form-group { text-align:left; }
-
+  .modal-title {
+    font-size: 26px;
+  }
+  .or {
+    text-align: center !important;
+    margin-bottom:0;
+     label {
+       margin-bottom:0; 
+     }
+  }
+  div.form-group {
+    text-align: left;
+  }
 }
-
-
-
 .open-login {
-
   #login-dropdown-list {
     list-style: none;
-
     & > a.dropdown-toggle {
       display: none;
     }
-
     & > .dropdown-menu {
       display: block;
       position: relative;
       float: none;
       margin: 0 auto;
       min-width: inherit;
-
       .clearfix();
-
       #login-other-options {
         a {
           color: #000;
@@ -45,7 +50,6 @@
           display: none;
         }
       }
-
       .alert {
         position: relative;
         top: initial;
@@ -54,24 +58,18 @@
         bottom: initial;
         z-index: initial;
       }
-
       #login-buttons-password {
         width: 100%;
       }
-
     }
   }
 }
-
 .minimal-login {
-
   #login-dropdown-list {
     list-style: none;
-
     & > a.dropdown-toggle {
       display: none;
     }
-
     & > .dropdown-menu {
       display: block;
       position: relative;
@@ -80,21 +78,16 @@
       min-width: inherit;
       background: transparent;
       padding: 0;
-
       .clearfix();
-
       #login-email {
         display: none;
       }
-
       #login-password {
         border-radius: 5px;
       }
-
       #signup-link {
         display: none;
       }
-
     }
   }
 }

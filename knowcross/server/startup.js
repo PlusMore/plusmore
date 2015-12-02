@@ -19,19 +19,20 @@ Meteor.startup(function() {
 
         // console.log(value);
 
+        if (isNumeric(room)) {
+          if (Rooms.find({
+              hotelId: hotelID,
+              name: room
+            }).count() === 0) {
+            // Only imported if not existing
+            Rooms.insert({
+              hotelId: hotelID,
+              name: room,
+              tritonRoomId: value[1],
+              imported: true
+            });
 
-        if (Rooms.find({
-            hotelId: hotelID,
-            name: room
-          }).count() === 0) {
-          // Only imported if not existing
-          Rooms.insert({
-            hotelId: hotelID,
-            name: room,
-            tritonRoomId: value[1],
-            imported: true
-          });
-
+          }
         }
       }
     });

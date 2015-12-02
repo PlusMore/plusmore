@@ -1,5 +1,4 @@
 // TODO:
-// PAT: When we create an order we should put the knowcross request id in the order data, and if it is present, than poll knowcross to get current status information when viewed.
 // dan: currently entering the id - need to do tracking on hotel app side?
 // USED for tracking: http://182.73.86.222:443/TritonActivityWeb/TritonActivity.aspx?ACTION=STATUS&USER=plusmore&pswd=82296&REQID=10516478
 // How do we handle errors ? When a request doesn't get sent or registered or receives an error, yet it gets added on our side?
@@ -24,8 +23,14 @@
           '_id': request.roomId
         }).fetch()[0];
         var roomId = room.tritonRoomId;
-        console.log(request);
+        // console.log(request);
         var serviceType = theMarkServiceType(request.service);
+
+        if (serviceType === "0") {
+          console.log('end request - send email');
+          return false;
+        }
+
         var remarks = 'date ' + request.service.date;
 
         if (typeof request.service.tip != "undefined") {
@@ -36,21 +41,22 @@
 
           if (typeof request.service.options.transportationType !=
           "undefined") {
-            remarks += ', transportation type ' + request.service.options
+            remarks += 'transportation type ' + request.service.options
                 .transportationType;
           }
 
           if (typeof request.service.options.ticketNumber !=
           "undefined") {
-            remarks += ', ticket number ' + request.service.options.ticketNumber;
+            remarks += 'ticket number ' + request.service.options.ticketNumber;
           }
         }
 
         var call = baseURL + 'REGISTER&LOCATION=' + roomId + '&CALLID=' +
           serviceType + loginOpts + remarksOpts + remarks;
+
         console.log(call);
-        // var response=Meteor.http.call("GET", call).content;
-        // console.log(response);
+        var response = Meteor.http.call("GET", call).content;
+        console.log(response);
 
         if (response.match(/(SUCCESS)/)) {
           console.log("Succesfully added triton request");

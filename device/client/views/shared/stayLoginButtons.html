@@ -1,8 +1,8 @@
 <template name="stayLoginButtons">
 
 
-        <div id="selectLogin">
-  {{#autoForm schema=myLoginSchema id='loginSchema'}}
+  <div id="selectLogin">
+    {{#autoForm schema=myLoginSchema id='loginSchema'}}
     <div class="modal-header">
       <h2 class="modal-title animated-fadeInRight">
         <h2 class="modal-title animated fadeInRight">Guest Verification</h2>
@@ -12,9 +12,9 @@
       <div class="row animated fadeInRight">
 
         {{#if hasLoginError}}
-          <div class="col-xs-12 col-sm-12 has-error animated fadeInDown">
-            <span class="help-block">{{getCustomLoginError}}</span>
-          </div>
+        <div class="col-xs-12 col-sm-12 has-error animated fadeInDown">
+          <span class="help-block">{{getCustomLoginError}}</span>
+        </div>
         {{/if}}
 
         <div class="col-xs-12 col-sm-6">
@@ -23,23 +23,24 @@
         <div class="col-xs-12 col-sm-6">
           {{> afQuickField name='lastName'}}
         </div>
-          <div class="clearfix"></div>
+        <div class="clearfix"></div>
         <div class="col-xs-12 col-sm-5">
           {{> afQuickField name='roomNumber'}}
         </div>
         <div class="col-xs-12 col-sm-1 form-group or">
-            <label class="control-label">OR</label>
+          <label class="control-label">OR</label>
         </div>
         <div class="col-xs-12 col-sm-6">
           {{> afQuickField name='checkoutDate'}}
         </div>
+        <div class="clearfix"></div>
+        <div class="col-xs-12 col-sm-12 text-right">
+          <button type='submit' id='btn-step-one' class="btn btn-default animated fadeInRight">Sign in</button>
+        </div>
 
       </div>
     </div>
-    <div class="modal-footer">
-      <button type='submit' id='btn-step-one' class="btn btn-default animated fadeInRight">Sign in</button>
-    </div>
-  {{/autoForm}}
-        </div>
+    {{/autoForm}}
+  </div>
 
 </template>

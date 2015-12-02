@@ -8,6 +8,13 @@ urlToJSON = function(url) {
   return tabletojson.convert(html);
 }
 
+
+isNumeric = function(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+
+
 theMarkServiceType = function(serviceType) {
   switch (serviceType.type) {
     case 'bellService':
@@ -20,9 +27,6 @@ theMarkServiceType = function(serviceType) {
           break;
         case 'Turndown':
           return "25170";
-          break;
-        case 'Bath amenities':
-          return "678"; // ??
           break;
         case 'Rollaway':
           return "25070";
@@ -45,23 +49,14 @@ theMarkServiceType = function(serviceType) {
         case 'Towels':
           return "25244";
           break;
-        case 'Additional sheets':
-          return "25235"; // ?? type of room?
-          break;
-        case 'Laundry Pickup (standard)':
+        case 'Laundry Pickup':
           return "25196";
           break;
-        case 'Laundry Pickup (express)':
-          return "25196"; //???
-          break;
-        case 'Laundry Delivery (standard)':
+        case 'Laundry Delivery':
           return "25195";
           break;
-        case 'Laundry Delivery (express)':
-          return "25195"; //??
-          break;
-        case 'Blanket':
-          return "24986"; // ?? type of room?
+        case 'Wool Blanket':
+          return "25114";
           break;
         case 'Bathrobe':
           return "24983";
@@ -89,39 +84,39 @@ theMarkServiceType = function(serviceType) {
     case 'maintenance':
       switch (serviceType.options.MaintenanceRequest) {
         case 'Air Conditioning & Heating':
-          return "25121";
+          return "0";
           break;
         case 'In Room Safe':
-          return "888";
+          return "0";
           break;
         case 'Light Bulb':
-          return "52";
+          return "0";
           break;
         case 'Shower':
-          return "84";
+          return "0";
           break;
         case 'Sink':
-          return "354";
+          return "0";
           break;
         case 'Toilet':
-          return "401";
+          return "0";
           break;
         case 'Other':
-          return "294";
+          return "0";
           break;
         default:
           console.log(serviceType.type.options.HouseKeepingRequest);
-          return "294";
+          return "0";
       }
       break;
     case 'wakeUpCall':
       return "26721"; // Courtesy call to guest //what is the proper service?
       break;
     case 'transportation':
-      return "45"; //Taxi service
+      return "0"; //Taxi service
       break;
     case 'valetServices':
-      return "899"; // Other guest service center//what is the proper service?
+      return "0"; // Other guest service center//what is the proper service?
       break;
     default:
       console.log('The type of service requested has not been configured');
