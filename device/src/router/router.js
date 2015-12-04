@@ -12,6 +12,7 @@ Router.configure({
 
 var filters = {
   onRun: function() {
+    console.log(this);
     Meteor.setTimeout(function() {
       $('.main').animate({
         scrollTop: 0
@@ -42,6 +43,32 @@ Router.route('/', function() {
 }, {
   name: 'welcome'
 });
+
+Router.route('/onboard', function() {
+
+  var redirectTo = 'https://device.plusmoretablets.com';
+  console.log('redirecting...');
+
+  if (navigator.userAgent.toLowerCase().indexOf("android") > -1) {
+    console.log('android detected, redirecting to play store.');
+    redirectTo =
+      'https://play.google.com/store/apps/details?id=com.plusmoretablets.device&hl=en';
+  } else if (navigator.userAgent.toLowerCase().indexOf("iphone") > -1) {
+    console.log('iphone detected, redirecting to app store.')
+    redirectTo =
+      'https://itunes.apple.com/us/app/plusmore-hotels/id948792804?mt=8';
+  }
+
+  document.location = redirectTo;
+
+  Meteor.setTimeout(function() {
+    document.location = redirectTo;
+  }, 100);
+
+}, {
+  name: 'onboard'
+});
+
 
 Router.route('/setup-device', function() {
   this.render('setupDevice');
@@ -144,8 +171,14 @@ Router.route('/experiences/:categoryId', function() {
         });
       }
       return {
-        experiences: Experiences.find(experiencesQuery, {$sort: {sortOrder: 1}}),
-        category: Categories.findOne({_id: activeCategoryId})
+        experiences: Experiences.find(experiencesQuery, {
+          $sort: {
+            sortOrder: 1
+          }
+        }),
+        category: Categories.findOne({
+          _id: activeCategoryId
+        })
       };
     }
   });
@@ -165,6 +198,7 @@ Router.route('/experiences/:categoryId', function() {
       console.log('State code not set for hotel, using NY');
     }
 
-    return subs.subscribe('experiencesData', this.params.categoryId, stateCode);
+    return subs.subscribe('experiencesData', this.params.categoryId,
+      stateCode);
   }
 });
