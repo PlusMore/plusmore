@@ -15,7 +15,7 @@ Accounts.emailTemplates.enrollAccount.subject = function(user) {
   return text + user.profile.firstName + "!";
 };
 Accounts.emailTemplates.enrollAccount.text = function(user, url) {
-  var spliturl = url.split('/#'); 
+  var spliturl = url.split('/#');
 
   var appUrl = Cluster.discovery.pickEndpoint('hotel');
 
@@ -25,20 +25,28 @@ Accounts.emailTemplates.enrollAccount.text = function(user, url) {
     appUrl = Cluster.discovery.pickEndpoint('onboard');
     var stay = Stays.findOne(user.stayId);
     var hotel = Hotels.findOne(stay.hotelId);
-    text += "Welcome to " +  hotel.name + "!\n\n";
-    text += "In order to serve you better, we've partnered with PlusMore, a digital concierge app based here in NYC.\n\n";
+    text += "Welcome to " + hotel.name + "!\n\n";
+    text +=
+      "In order to serve you better, we've partnered with PlusMore, a digital concierge app based here in NYC.\n\n";
     text += "By using the PlusMore app you can:\n\n"
-    text += "\t - Make various hotel requests like luggage pick-up or a wake up call\n"
-    text += "\t - Learn about and book reservations at the city's hottest restaurants\n"
+    text +=
+      "\t - Make various hotel requests like luggage pick-up or a wake up call\n"
+    text +=
+      "\t - Learn about and book reservations at the city's hottest restaurants\n"
     text += "\t - Make table reservations at the most exclusive nightclubs\n"
     text += "\t - Get some great sightseeing recommendations\n\n"
   }
 
-  appUrl += '/#' + spliturl[1];
+  // appUrl += '/#' + spliturl[1];
+  appUrl = Cluster.discovery.pickEndpoint('device') + 'onboard';
 
-  text += "Click here to get started with PlusMore:\n\n" + appUrl;
+  text +=
+    "Click here to get started with PlusMore by downloading our application:\n\n" +
+    appUrl;
+
   if (hotel) {
-    text += "\n\nAs always, feel free to reach out to us at any time if you have any additional questions. We look forward to serving you!\n\n"
+    text +=
+      "\n\nAs always, feel free to reach out to us at any time if you have any additional questions. We look forward to serving you!\n\n"
     text += "-" + hotel.name;
   }
 
@@ -147,7 +155,9 @@ Accounts.validateLoginAttempt(function(attempt) {
 
   if (attempt.user) {
     if (!attempt.user.emails[0].verified) {
-      throw new Meteor.Error(300, 'Please verify your email address by clicking the link in the verification email that was sent to ' + attempt.user.emails[0].address + '.');
+      throw new Meteor.Error(300,
+        'Please verify your email address by clicking the link in the verification email that was sent to ' +
+        attempt.user.emails[0].address + '.');
     } else {
       return true;
     }
