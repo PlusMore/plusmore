@@ -6,7 +6,8 @@ App.info({
   description: 'Hotel automation and digital concierge.',
   author: 'PlusMore Team',
   email: 'info@plusmoretablets.com',
-  website: 'http://plusmoretablets.com'
+  website: 'http://plusmoretablets.com',
+  version: '0.13.0'
 });
 
 App.icons({
