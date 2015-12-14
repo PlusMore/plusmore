@@ -59,6 +59,7 @@ build:
 	SUBDOMAIN=$(SUBDOMAIN) \
 	VERSION=$(VERSION) \
 	meteor build ~/cordova-builds/$(APP_ENV) --server=https://$(SUBDOMAIN).plusmoretablets.com
+# 	sed -i "" -e "s/ifndef DISABLE_PUSH_NOTIFICATIONS/if 0/" ~/cordova-builds/$(APP_ENV)/ios/project/PlusMore/Classes/AppDelegate.m
 	cd ~/cordova-builds/$(APP_ENV)/android/
 	jarsigner -digestalg SHA1 ~/cordova-builds/$(APP_ENV)/android/release-unsigned.apk $(SUBDOMAIN)
 	~/.meteor/android_bundle/android-sdk/build-tools/20.0.0/zipalign 4 ~/cordova-builds/$(APP_ENV)/android/release-unsigned.apk ~/cordova-builds/$(APP_ENV)/android/$(SUBDOMAIN)-$(VERSION).apk

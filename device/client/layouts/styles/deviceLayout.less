@@ -26,12 +26,27 @@ img.bg {
   z-index: 0;
 }
 
+
 @media screen and (max-width: 1024px) { /* Specific to this particular image */
   img.bg {
     left: 50%;
     margin-left: -512px;   /* 50% */
   }
 }
+
+
+@media screen and (max-width: 414px) { /* Specific to this particular image */
+  img.bg {
+    top: -30px;
+    left: 50%;
+    min-width: 652px;
+    margin-left: -326px;
+    height: auto;
+    min-height: 666px;
+  }
+}
+
+
 
 div[class^="overlay-"] {
   position: absolute;

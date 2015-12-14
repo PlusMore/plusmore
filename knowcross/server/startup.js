@@ -1,4 +1,6 @@
 Meteor.startup(function() {
+  console.log(inProduction());
+  emailer = Cluster.discoverConnection('emailService');
 
   if (Rooms.find({
       'hotelId': hotelID,

@@ -15,19 +15,37 @@
     added: function(orderId, request) {
       if (!initializing) {
 
-        // when we find a new order, we log to console for debugging.
-        // console.log(request);
         var room = Rooms.find({
           'hotelId': hotelID,
           'imported': true,
           '_id': request.roomId
         }).fetch()[0];
         var roomId = room.tritonRoomId;
-        // console.log(request);
+
+        console.log(request);
+
+        // what do we do when someone cancels a reservation?
+
+        if (request.type === 'reservation') {
+          // email reservations
+          reservationRequestedEmail(orderId,
+            'TMNYC-concierge@themarkhotel.com');
+          // restaurant@themarkhotel.com
+          return false;
+        }
+
+
         var serviceType = theMarkServiceType(request.service);
 
-        if (serviceType === "0") {
-          console.log('end request - send email');
+        // Luggage and Wake-up call should create email to TMNYC-FrontOffice@TheMarkHotel.com while we get acclimated to the system as a backup
+        //  Food/Nightlife bookings need to trigger email to concierge so they can add these bookings and confirm with guest after booking is done
+
+        if (serviceType === "26721" || serviceType === "26816") {
+          // wakeUpCall - 26721
+          // bellService - 26816
+          serviceRequestedEmail(orderId,
+            theMarkEmail(request.service));
+          console.log('end request - sent email to the mark');
           return false;
         }
 
@@ -40,13 +58,13 @@
         if (typeof request.service.options != "undefined") {
 
           if (typeof request.service.options.transportationType !=
-          "undefined") {
+            "undefined") {
             remarks += 'transportation type ' + request.service.options
-                .transportationType;
+              .transportationType;
           }
 
           if (typeof request.service.options.ticketNumber !=
-          "undefined") {
+            "undefined") {
             remarks += 'ticket number ' + request.service.options.ticketNumber;
           }
         }
@@ -55,7 +73,13 @@
           serviceType + loginOpts + remarksOpts + remarks;
 
         console.log(call);
-        var response = Meteor.http.call("GET", call).content;
+
+        if (inProduction() === true) {
+          var response = Meteor.http.call("GET", call).content;
+        } else {
+          var response = 'not pushing request - in development mode';
+        }
+
         console.log(response);
 
         if (response.match(/(SUCCESS)/)) {
@@ -69,8 +93,20 @@
           });
 
         } else if (response.match(/(DUPLICATE)/)) {
+
+          //email DUPLICATE
+          serviceRequestedEmail(orderId,
+            theMarkEmail(request.service),
+            'Error - Duplicate request when adding in Triton');
+
           console.log("Error - Duplicate request when adding in Triton");
         } else {
+
+          serviceRequestedEmail(orderId,
+            theMarkEmail(request.service),
+            'Error in adding Triton request');
+
+          // email error
           console.log("Error in adding Triton request");
         }
 

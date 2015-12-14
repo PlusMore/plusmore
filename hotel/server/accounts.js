@@ -19,10 +19,12 @@ Accounts.emailTemplates.enrollAccount.text = function(user, url) {
 
   var appUrl = Cluster.discovery.pickEndpoint('hotel');
 
+  appUrl += '/#' + spliturl[1];
   var text = "Hi " + user.profile.firstName + ",\n\n";
 
   if (Roles.userIsInRole(user, ['guest'])) {
-    appUrl = Cluster.discovery.pickEndpoint('onboard');
+    // appUrl = Cluster.discovery.pickEndpoint('onboard');
+    appUrl = Cluster.discovery.pickEndpoint('device') + '/onboard';
     var stay = Stays.findOne(user.stayId);
     var hotel = Hotels.findOne(stay.hotelId);
     text += "Welcome to " + hotel.name + "!\n\n";
@@ -37,8 +39,7 @@ Accounts.emailTemplates.enrollAccount.text = function(user, url) {
     text += "\t - Get some great sightseeing recommendations\n\n"
   }
 
-  // appUrl += '/#' + spliturl[1];
-  appUrl = Cluster.discovery.pickEndpoint('device') + 'onboard';
+  console.log(user.profile.firstName + ' ' + appUrl);
 
   text +=
     "Click here to get started with PlusMore by downloading our application:\n\n" +

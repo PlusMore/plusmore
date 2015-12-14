@@ -2,8 +2,6 @@
 
 ## Collections ##
 
-All code related to the Collections collection goes here. Disallow all edits from the client side - we only need server side code.
-
 /+ ---------------------------------------------------- */
 
 Hotels = new Meteor.Collection('hotels');
@@ -40,6 +38,20 @@ Orders.allow({
 Rooms = new Meteor.Collection('rooms');
 
 Rooms.allow({
+  insert: function(userId, doc) {
+    return false;
+  },
+  update: function(userId, doc, fieldNames, modifier) {
+    return false;
+  },
+  remove: function(userId, doc) {
+    return false;
+  }
+});
+
+Experiences = new Meteor.Collection('experiences');
+
+Experiences.allow({
   insert: function(userId, doc) {
     return false;
   },

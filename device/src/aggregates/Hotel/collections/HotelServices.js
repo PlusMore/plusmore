@@ -20,7 +20,7 @@ HotelServices.friendlyServiceType = function(serviceType) {
     case 'bellService':
       return 'Luggage Pickup';
     case 'houseKeeping':
-      return 'House Keeping';
+      return 'Housekeeping';
     case 'wakeUpCall':
       return 'Wake Up Call';
     case 'valetServices':
