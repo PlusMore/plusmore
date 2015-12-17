@@ -5,6 +5,7 @@ Accounts.emailTemplates.enrollAccount.subject = function(user) {
 
   if (Roles.userIsInRole(user, ['guest'])) {
     var stay = Stays.findOne(user.stayId);
+
     var hotel = Hotels.findOne(stay.hotelId);
 
     text += "Welcome to " + hotel.name + ", ";

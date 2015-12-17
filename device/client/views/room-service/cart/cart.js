@@ -3,25 +3,31 @@ Template.cart.helpers({
     var stay = Stays.findOne();
     var stayId = stay && stay._id;
     var cartId = stayId || Meteor.default_connection._lastSessionId;
-    return CartItems.find({cartId: cartId}).count() > 0;
+    return CartItems.find({
+      cartId: cartId
+    }).count() > 0;
   },
   emptyCartDisabled: function() {
     var stay = Stays.findOne();
     var stayId = stay && stay._id;
     var cartId = stayId || Meteor.default_connection._lastSessionId;
-    return CartItems.find({cartId: cartId}).count() > 0 ? '' : 'disabled';
+    return CartItems.find({
+      cartId: cartId
+    }).count() > 0 ? '' : 'disabled';
   },
-  cartItems: function(){
+  cartItems: function() {
     var shopCart = [];
     var stay = Stays.findOne();
     var stayId = stay && stay._id;
     var cartId = stayId || Meteor.default_connection._lastSessionId;
-    var cartItems = CartItems.find({cartId: cartId});
+    var cartItems = CartItems.find({
+      cartId: cartId
+    });
     var total = 0;
     var tip = Session.get('selectedTip') || 0;
     var hotel = Hotels.findOne();
 
-    cartItems.forEach(function(cartItem){
+    cartItems.forEach(function(cartItem) {
       var item;
       if (cartItem.itemType === 'menuItem') {
         item = MenuItems.findOne(cartItem.itemId);
@@ -32,10 +38,24 @@ Template.cart.helpers({
       shopCart.push(cartItem);
     });
 
+    configuration = HotelServices.findOne({
+      type: 'roomService',
+      hotelId: hotel._id
+    });
+
     shopCart.subtotal = total;
     var taxRate = hotel && hotel.taxRate || 0.06;
     shopCart.tax = shopCart.subtotal * taxRate;
-    shopCart.total = shopCart.subtotal + shopCart.tax + tip;
+
+    shopCart.gratuity = (shopCart.subtotal + shopCart.tax) *
+      configuration.gratuity / 100;
+
+    shopCart.total = shopCart.subtotal + shopCart.tax + tip +
+      configuration.deliveryFee + shopCart.gratuity;
+
+
+    //     console.log(hotel);
+
     return shopCart;
   },
   taxRate: function() {
@@ -45,7 +65,7 @@ Template.cart.helpers({
 });
 
 Template.cart.events({
-  'click .remove-item':function(e, tmpl) {
+  'click .remove-item': function(e, tmpl) {
     e.preventDefault();
     e.stopImmediatePropagation();
     var that = this;
@@ -53,21 +73,22 @@ Template.cart.events({
 
     bootbox.dialog({
       title: 'Remove ' + that.name,
-      message: "Are you sure you would like to remove " + that.name + ' from your cart?',
+      message: "Are you sure you would like to remove " + that.name +
+        ' from your cart?',
       closeButton: false,
       buttons: {
         cancel: {
           label: 'Cancel',
           className: 'btn-cancel',
-          callback: function () {
+          callback: function() {
             Session.set('modalOpen', false);
           }
         },
         main: {
           label: 'Remove Item',
           className: 'btn-default',
-          callback:function(result) {
-            Meteor.call('removeCartItem',that._id);
+          callback: function(result) {
+            Meteor.call('removeCartItem', that._id);
             Session.set('modalOpen', false);
           }
         }
@@ -88,14 +109,14 @@ Template.cart.events({
         cancel: {
           label: 'Cancel',
           className: 'btn-cancel',
-          callback: function () {
+          callback: function() {
             Session.set('modalOpen', false);
           }
         },
         main: {
           label: 'Empty Cart',
           className: 'btn-default',
-          callback:function(result) {
+          callback: function(result) {
             var stay = Stays.findOne();
             var stayId = stay && stay._id;
             var cartId = stayId || Meteor.default_connection._lastSessionId;
@@ -126,14 +147,14 @@ Template.cart.events({
         cancel: {
           label: 'Cancel',
           className: 'btn-cancel',
-          callback: function () {
+          callback: function() {
             Session.set('modalOpen', false);
           }
         },
         main: {
           label: 'Place Order',
           className: 'btn-default',
-          callback:function(result) {
+          callback: function(result) {
             var now = moment();
             var zone = now.zone();
             var tip = Session.get('selectedTip');
@@ -144,12 +165,14 @@ Template.cart.events({
               Session.set('modalOpen', false);
 
 
-              Meteor.call('orderRoomServiceCartItems', now.toDate(), zone, cartId, tip, function(err, result) {
-                if (err) {
-                  return Errors.throw(err.message);
-                }
-                Router.go('recent-orders');
-              });
+              Meteor.call('orderRoomServiceCartItems', now.toDate(),
+                zone, cartId, tip,
+                function(err, result) {
+                  if (err) {
+                    return Errors.throw(err.message);
+                  }
+                  Router.go('recent-orders');
+                });
             });
 
             $(document).one('cancel-user-selected', function() {
@@ -158,7 +181,8 @@ Template.cart.events({
               Session.set('modalOpen', false);
 
 
-              return Errors.throw('Please log in to order room service.');
+              return Errors.throw(
+                'Please log in to order room service.');
             });
 
             if (!Meteor.user()) {

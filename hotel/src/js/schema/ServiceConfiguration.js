@@ -23,5 +23,15 @@ Schema.ServiceConfiguration = new SimpleSchema({
   allowTips: {
     type: Boolean,
     label: "Allow Tipping?"
+  },
+  deliveryFee: {
+    type: Number,
+    optional: true,
+    label: "Delivery fee ($)"
+  },
+  gratuity: {
+    type: Number,
+    optional: true,
+    label: "Gratuity (%)"
   }
 });

@@ -34,6 +34,18 @@
         <td class="totalcol text-align-right" colspan="2">Tax:</td>
         <td class='text-align-right'>{{currency service.orderTax}}</td>
       </tr>
+      {{#if service.orderGratuity}}
+        <tr>
+          <td class="totalcol text-align-right" colspan="2">Gratuity:</td>
+          <td class='text-align-right'>{{currency service.orderGratuity}}</td>
+        </tr>
+      {{/if}}
+      {{#if service.orderDeliveryFee}}
+        <tr>
+          <td class="totalcol text-align-right" colspan="2">Delivery fee:</td>
+          <td class='text-align-right'>{{currency service.orderDeliveryFee}}</td>
+        </tr>
+      {{/if}}
       {{#if service.tip}}
         <tr>
           <td class="totalcol text-align-right" colspan="2">Tip:</td>

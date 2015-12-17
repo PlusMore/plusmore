@@ -43,11 +43,29 @@
             <td colspan="1" class='text-align-right'>{{currency cartItems.subtotal}}</td>
             <td></td>
           </tr>
+
           <tr>
             <td class="totalcol" colspan="2">Tax:</td>
             <td colspan="1" class='text-align-right'>{{currency cartItems.tax}}</td>
             <td></td>
           </tr>
+
+          {{#if configuration.deliveryFee}}
+          <tr>
+            <td class="totalcol" colspan="2">Delivery fee:</td>
+            <td colspan="1" class='text-align-right'>{{currency configuration.deliveryFee}}</td>
+            <td></td>
+          </tr>
+          {{/if}}
+
+          {{#if configuration.gratuity}}
+          <tr>
+          <td class="totalcol" colspan="2">Gratuity:</td>
+          <td colspan="1" class='text-align-right'>{{configuration.gratuity}}%</td>
+          <td></td>
+        </tr>
+          {{/if}}
+
           {{#if configuration.allowTips}}
             <tr>
               <td class="totalcol" colspan="2">Tip:</td>
@@ -55,6 +73,9 @@
               <td></td>
             </tr>
           {{/if}}
+
+
+
           <tr>
             <td class="totalcol" colspan="2">Total:</td>
             <td colspan="1" class='text-align-right'>{{currency cartItems.total}}</td>

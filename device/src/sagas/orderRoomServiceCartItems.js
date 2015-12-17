@@ -28,14 +28,19 @@ Meteor.methods({
       throw new Meteor.Error(420, 'Not a proper room');
     }
 
-    var device = Devices.findOne({roomId: room._id});
+    var device = Devices.findOne({
+      roomId: room._id
+    });
 
     var hotel = Hotels.findOne(stay.hotelId);
     if (!hotel) {
       throw new Meteor.Error(420, 'Not a valid hotel');
     }
 
-    var hotelService = HotelServices.find({hotelId: hotel._id, type: "roomService"});
+    var hotelService = HotelServices.find({
+      hotelId: hotel._id,
+      type: "roomService"
+    });
     if (!hotelService) {
       throw new Meteor.Error(420, 'Not a valid hotel service');
     }
@@ -77,7 +82,17 @@ Meteor.methods({
     orderedItems.subtotal = total;
     var taxRate = hotel.taxRate || 0.06;
     orderedItems.tax = orderedItems.subtotal * taxRate;
-    orderedItems.total = orderedItems.subtotal + orderedItems.tax + tip;
+
+    configuration = HotelServices.findOne({
+      type: 'roomService',
+      hotelId: hotel._id
+    });
+
+    orderedItems.gratuity = (orderedItems.subtotal + orderedItems.tax) *
+      configuration.gratuity / 100;
+
+    orderedItems.total = orderedItems.subtotal + orderedItems.tax + tip +
+      configuration.deliveryFee + orderedItems.gratuity;
 
     var service = {
       type: 'roomService',
@@ -86,6 +101,8 @@ Meteor.methods({
       orderSubtotal: orderedItems.subtotal,
       orderTax: orderedItems.tax,
       orderTotal: orderedItems.total,
+      orderGratuity: orderedItems.gratuity,
+      orderDeliveryFee: configuration.deliveryFee,
       zone: zone,
       tip: tip,
       taxRate: taxRate
@@ -110,7 +127,8 @@ Meteor.methods({
     }
 
     return Orders.insert(order, function(err) {
-      if (err) throw new Meteor.Error(err);
+      if (err)
+        throw new Meteor.Error(err);
     });
   }
 });
