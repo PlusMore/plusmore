@@ -53,6 +53,8 @@ Meteor.startup(function() {
 
       check(options, commandSchema);
 
+	console.log(options,'sending mail');
+
       // for our information
       Email.send({
         to: options.email,

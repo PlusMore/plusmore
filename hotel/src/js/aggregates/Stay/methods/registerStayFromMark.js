@@ -1,16 +1,15 @@
 Meteor.methods({
-  'registerStayFromMark': function(stay) {
-    console.log(stay);
+  'registerStayFromMark': function(myStay) {
 
-    var checkoutDate = moment(stay.departure, "DD/MM/YYYY").set('hour',
+    var checkoutDate = moment(myStay.departure, "DD/MM/YYYY").set('hour',
       12).toDate();
 
-    console.log('Import: ', stay.lastName, checkoutDate);
+    console.log('Import: ', myStay.lastName, checkoutDate);
     // to fix date
 
     var room = Rooms.findOne({
-      hotelId: stay.hotel,
-      name: stay.room
+      hotelId: myStay.hotel,
+      name: myStay.room
     });
     if (!room) {
       throw new Meteor.Error(500, 'Not a valid room');
@@ -20,8 +19,8 @@ Meteor.methods({
       var stay = Stays.findOne(room.stayId);
 
       if (stay) {
-        if (moment().zone(checkoutDate.zone) < moment(stay.checkoutDate.date)
-          .zone()) {
+        if (moment().utcOffset(checkoutDate.zone) < moment(stay.checkoutDate.date)
+          .utcOffset()) {
           // this room already has a registered stay
           // if no users, allow it to be overwritten
 
@@ -43,32 +42,30 @@ Meteor.methods({
 
 
     var accountOptions = {
-      email: stay.email,
+      email: myStay.email,
       profile: {
-        firstName: stay.firstName,
-        lastName: stay.lastName,
-        vip: stay.vip,
-        company: stay.company
+        firstName: myStay.firstName,
+        lastName: myStay.lastName,
+        vip: myStay.vip,
+        company: myStay.company
       },
       roles: ['guest'],
       stayId: stayId
     }
 
-    if (typeof stay.email === 'undefined' || stay.email === '' || stay.email ===
-      null) {
-      username = stay.firstName + stay.lastName + Math.floor((
-        Math.random() * 100) + 1);
-      accountOptions.username = username.replace(/\W/g, '');
+   
+
+    if ( myStay.email.length == 0 ) {
+      var theUsername = myStay.firstName+myStay.lastName; 
+      console.log(theUsername,'log username here');
+      accountOptions.username = theUsername + Math.floor((Math.random() * 100) + 1);
       // your code here.
     };
 
 
-    console.log(accountOptions);
-
-
     // is guest a previous user
     var user = Meteor.users.findOne({
-      'emails.address': stay.email
+      'emails.address': myStay.email
     });
 
 
@@ -87,7 +84,7 @@ Meteor.methods({
       checkInDate: new Date(),
       checkoutDate: checkoutDate,
       zone: 300,
-      hotelId: stay.hotel,
+      hotelId: myStay.hotel,
       roomId: room._id,
       roomName: room.name, // Used frequently in UI, so denormalized
       active: true,
@@ -95,7 +92,6 @@ Meteor.methods({
       guestId: guestId
     });
 
-    // console.log(stayId);
 
     Rooms.update(room._id, {
       $set: {
@@ -122,8 +118,7 @@ Meteor.methods({
     }
 
 
-    console.log('new arrival', stay.lastName, stay.hotel, stayId);
+    console.log('new arrival', myStay.lastName, myStay.hotel, stayId);
 
-    //     console.log(stay);
   }
 });

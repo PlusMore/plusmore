@@ -9,11 +9,16 @@ Meteor.methods({
     console.log('placing order for cart', cartId);
 
     var user = Meteor.user();
+
+    console.log('user', user);
+
     if (!user) {
       throw new Meteor.Error(403, 'Unauthorized');
     }
 
     var stay = Stays.findOne(user.stayId);
+
+    console.log('stay', stay);
 
     if (!stay) {
       throw new Meteor.Error(403, 'No current stay registered for user');

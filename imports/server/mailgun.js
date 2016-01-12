@@ -124,14 +124,64 @@ JsonRoutes.add("post", "/arrivals/themark", function(req, res, next) {
     var guest = req.body['body-plain'].split("\n");
     console.log(guest);
 
+
+    if (guest[0].slice(16) != '' || typeof(guest[0].slice(16)) != undefined) {
+      insertRoom = guest[0].slice(16).replace(/(\r\n|\n|\r)/gm, "");
+    } else {
+      insertRoom = '';
+    }
+
+    if (guest[1].slice(18) != '' || typeof(guest[1].slice(18)) != undefined) {
+      insertFirstName = guest[1].slice(18).replace(/(\r\n|\n|\r)/gm, "");
+    } else {
+      insertFirstName = '';
+    }
+
+    if (guest[2].slice(16) != '' || typeof(guest[2].slice(16)) != undefined) {
+      insertLastName = guest[2].slice(16).replace(/(\r\n|\n|\r)/gm, "");
+    } else {
+      insertLastName = '';
+    }
+
+    if (guest[3].slice(5) != '' || typeof(guest[3].slice(5)) != undefined) {
+      insertVIP = guest[3].slice(5).replace(/(\r\n|\n|\r)/gm, "");
+    } else {
+      insertVIP = '';
+    }
+
+
+    if (guest[4].slice(15, -6) != '' || typeof(guest[4].slice(15, -6)) !=
+      undefined) {
+      insertDeparture = guest[4].slice(15, -6).replace(/(\r\n|\n|\r)/gm, "");
+    } else {
+      insertDeparture = '';
+    }
+
+
+    if (guest[5].slice(7) != '' || typeof(guest[5].slice(7)) !=
+      undefined) {
+      insertCompany = guest[5].slice(7).replace(/(\r\n|\n|\r)/gm, "");
+    } else {
+      insertCompany = '';
+    }
+
+
+    if (guest[6].slice(7) != '' || typeof(guest[6].slice(7)) !=
+      undefined) {
+      insertEmail = guest[6].slice(7).replace(/(\r\n|\n|\r)/gm, "");
+    } else {
+      insertEmail = '';
+    }
+
+
     var insertGuest = {
-      'room': guest[0].slice(16).replace(/(\r\n|\n|\r)/gm, ""),
-      'firstName': guest[1].slice(18).replace(/(\r\n|\n|\r)/gm, ""),
-      'lastName': guest[2].slice(16).replace(/(\r\n|\n|\r)/gm, ""),
-      'vip': guest[3].slice(5).replace(/(\r\n|\n|\r)/gm, ""),
-      'departure': guest[4].slice(15, -6).replace(/(\r\n|\n|\r)/gm, ""),
-      'company': guest[5].slice(7).replace(/(\r\n|\n|\r)/gm, ""),
-      'email': guest[6].slice(7).replace(/(\r\n|\n|\r)/gm, ""),
+      'room': insertRoom,
+      'firstName': insertFirstName,
+      'lastName': insertLastName,
+      'vip': insertVIP,
+      'departure': insertDeparture,
+      'company': insertCompany,
+      'email': insertEmail,
       'hotel': '6FEjegHjX6Lq2YLYn'
     };
 

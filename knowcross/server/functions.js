@@ -17,6 +17,14 @@ inProduction = function() {
   return process.env.NODE_ENV === "production";
 };
 
+stripTrailingSlash = function(str) {
+  if (str.substr(-1) == '/') {
+    return str.substr(0, str.length - 1);
+  }
+  return str;
+};
+
+
 
 // this should be in database
 friendlyServiceType = function(serviceType) {
@@ -188,7 +196,7 @@ theMarkFriendlyServiceType = function(serviceType) {
 theMarkEmail = function(serviceType) {
   switch (serviceType.type) {
     case 'bellService':
-      return "TMNYC-concierge@themarkhotel.com"; //Pick up luggages
+      return "TMNYC-frontoffice@themarkhotel.com"; //Pick up luggages
       break;
     case 'houseKeeping':
       return "TMNYC-housekeeping@themarkhotel.com";
@@ -197,16 +205,16 @@ theMarkEmail = function(serviceType) {
       return "TMNYC-engineering@themarkhotel.com";
       break;
     case 'wakeUpCall':
-      return "TMNYC-concierge@themarkhotel.com"; // Courtesy call to guest //what is the proper service?
+      return "TMNYC-frontoffice@themarkhotel.com"; // Courtesy call to guest //what is the proper service?
       break;
     case 'transportation':
-      return "TMNYC-frontoffice@themarkhotel.com"; //Taxi service
+      return "TMNYC-concierge@themarkhotel.com"; //Taxi service
       break;
     case 'valetServices':
       return "TMNYC-frontoffice@themarkhotel.com"; // Other guest service center//what is the proper service?
       break;
     case 'roomService':
-      return "TMNYC-concierge@themarkhotel.com";
+      return "TMNYC-foodbeverage@themarkhotel.com";
       break;
     default:
       return "TMNYC-frontoffice@themarkhotel.com";
@@ -229,9 +237,17 @@ serviceRequestedEmail = function(orderId, emailAddress, error) {
     var adminEndpoint = Cluster.discovery.pickEndpoint('admin');
     var url;
 
+
     if (adminEndpoint) {
-      url = stripTrailingSlash(adminEndpoint) + "/patron-order/{0}".format(
-        orderId);
+
+      if (adminEndpoint.substr(-1) == '/') {
+        adminEndpoint = adminEndpoint.substr(0, str.length - 1);
+      }
+
+      url = adminEndpoint + "/patron-order/{0}";
+      // console.log(url);
+      // url = url.format(orderId);
+
     } else {
       url =
         'ERROR: Admin endpoint could not be reached. The url could not be generated. Please login to the admin application and search for the order.';
@@ -250,6 +266,13 @@ serviceRequestedEmail = function(orderId, emailAddress, error) {
       email: emailAddress,
       error: error
     };
+
+    if (emailer) {
+      console.log(options);
+    } else {
+      console.log('error - can not find emailer');
+    }
+
 
     return emailer.call('sendHotelServiceRequestedEmail', options);
   }
@@ -271,8 +294,14 @@ reservationRequestedEmail = function(orderId, emailAddress) {
       var url;
 
       if (adminEndpoint) {
-        url = stripTrailingSlash(adminEndpoint) + "/patron-order/{0}".format(
-          orderId);
+
+        if (adminEndpoint.substr(-1) == '/') {
+          adminEndpoint = adminEndpoint.substr(0, str.length - 1);
+        }
+
+        url = adminEndpoint + "/patron-order/{0}";
+        console.log(url);
+        // url = url.format(orderId);
       } else {
         url =
           'ERROR: Admin endpoint could not be reached. The url could not be generated. Please login to the admin application and search for the order.';

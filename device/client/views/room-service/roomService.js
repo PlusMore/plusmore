@@ -29,5 +29,8 @@ Template.roomService.onCreated(function() {
     console.log('cart', cartId);
     this.subscribe('hotelMenu', hotel._id);
     this.subscribe('cart', cartId);
+    this.subscribe('menusubcategories', hotel._id);
+
+
   }
 });

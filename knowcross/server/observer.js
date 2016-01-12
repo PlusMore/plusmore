@@ -22,14 +22,19 @@
         }).fetch()[0];
         var roomId = room.tritonRoomId;
 
-        console.log(request);
-
         // what do we do when someone cancels a reservation?
 
         if (request.type === 'reservation') {
-          // email reservations
+          // email reservations to concierce & adis
           reservationRequestedEmail(orderId,
             'TMNYC-concierge@themarkhotel.com');
+
+          reservationRequestedEmail(orderId,
+            'adis@plusmoretablets.com');
+
+          reservationRequestedEmail(orderId,
+            'dan@plusmoretablets.com');
+
           // restaurant@themarkhotel.com
           return false;
         }
@@ -37,15 +42,19 @@
 
         var serviceType = theMarkServiceType(request.service);
 
-        // Luggage and Wake-up call should create email to TMNYC-FrontOffice@TheMarkHotel.com while we get acclimated to the system as a backup
-        //  Food/Nightlife bookings need to trigger email to concierge so they can add these bookings and confirm with guest after booking is done
+        // Luggage and Wake-up call should create email to TMNYC-FrontOffice@TheMarkHotel.com
+        // while we get acclimated to the system as a backup
+        // Food/Nightlife bookings need to trigger email to concierge so they
+        // can add these bookings and confirm with guest after booking is done
 
-        if (serviceType === "26721" || serviceType === "26816") {
-          // wakeUpCall - 26721
-          // bellService - 26816
+        if (serviceType === "26721" || serviceType === "26816") { // wakeUpCall - 26721 // bellService - 26816
           serviceRequestedEmail(orderId,
             theMarkEmail(request.service));
-          console.log('end request - sent email to the mark');
+
+          serviceRequestedEmail(orderId,
+            'dan@plusmoretablets.com');
+
+          console.log('end request - sent email to the mark', request.service);
           return false;
         }
 
@@ -99,12 +108,22 @@
             theMarkEmail(request.service),
             'Error - Duplicate request when adding in Triton');
 
+          serviceRequestedEmail(orderId,
+            'dan@plusmoretablets.com',
+            'Error - Duplicate request when adding in Triton');
+
+
           console.log("Error - Duplicate request when adding in Triton");
         } else {
 
           serviceRequestedEmail(orderId,
             theMarkEmail(request.service),
             'Error in adding Triton request');
+
+          serviceRequestedEmail(orderId,
+            'dan@plusmoretablets.com',
+            'Error in adding Triton request');
+
 
           // email error
           console.log("Error in adding Triton request");

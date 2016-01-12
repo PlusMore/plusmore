@@ -28,10 +28,20 @@ Meteor.publish('hotelMenu', function(hotelId) {
   }
 });
 
+Meteor.publish('menusubcategories', function(hotelId) {
+  // hotelid
+  return MenuSubCategories.find({});
+});
+
+
 Meteor.startup(function() {
-  MenuItems._ensureIndex({menuCategoryId: 1});
+  MenuItems._ensureIndex({
+    menuCategoryId: 1
+  });
 });
 
 Meteor.startup(function() {
-  MenuCategories._ensureIndex({hotelId: 1});
+  MenuCategories._ensureIndex({
+    hotelId: 1
+  });
 });
