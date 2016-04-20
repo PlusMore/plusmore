@@ -55,11 +55,25 @@ Template.menuItems.helpers({
     }
 
   },
+  menuItemsForCategorySingle: function() {
+    return MenuItems.find({
+      menuCategoryId: this._id
+    }, {
+      sort: {
+        active: -1
+      }
+    });
+  },
   menuItemsForSubCategory: function(options) {
     //   console.log('asd', options,this.hotelId);
     return MenuSubCategories.find({
       hotelId: this.hotelId
     });
+  },
+  hasmenuItemsForSubCategory: function() {
+    return MenuSubCategories.find({
+      hotelId: this.hotelId
+    }).count();
   },
   enabledClass: function() {
     return this.active ? 'enabled' : 'disabled';

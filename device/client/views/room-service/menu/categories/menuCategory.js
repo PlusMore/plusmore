@@ -14,6 +14,9 @@ Template.menuCategory.helpers({
     return true;
   },
   hasMenuItems: function() {
+    console.log(MenuItems.find({
+      menuCategoryId: this._id
+    }).count());
     return MenuItems.find({
       menuCategoryId: this._id
     }).count() > 0;
