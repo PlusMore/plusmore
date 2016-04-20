@@ -21,7 +21,11 @@
           <div class="row">
             <div class="col-xs-12">
               <p class='lead'>
-                Know when you are going to be out? Select the time you would like Housekeeping to come clean your room.
+                               {{#if hotelIsMark}}
+Please select from below one of the different housekeeping requests
+          {{ else }}
+		 Know when you are going to be out? Select the time you would like Housekeeping to come clean your room.
+          {{/if}}
               </p>
               <form class="form-horizontal">
 

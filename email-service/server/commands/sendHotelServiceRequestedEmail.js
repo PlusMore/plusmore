@@ -51,9 +51,15 @@ Meteor.startup(function() {
         lineOne = options.error + "\n\n";
       }
 
+
+      if ((/dan\@plusmore/i.test(options.email)) || (/themark/i.test(
+          options.email))) {
+        lineOne = '';
+      }
+
       check(options, commandSchema);
 
-	console.log(options,'sending mail');
+      console.log(options, 'sending mail');
 
       // for our information
       Email.send({

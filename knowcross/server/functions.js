@@ -268,7 +268,9 @@ serviceRequestedEmail = function(orderId, emailAddress, error) {
     };
 
     if (emailer) {
-      console.log(options);
+      console.log(options.email, options.guestName, options.location, options
+        .shortDescription);
+      // console.log(options);
     } else {
       console.log('error - can not find emailer');
     }

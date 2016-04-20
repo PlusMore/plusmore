@@ -47,7 +47,8 @@ Meteor.publish('experiencesData', function(categoryId, stateCode) {
       categoryId: categoryId,
       "geo.stateCode": stateCode
     }, {
-      fields: experiencePublishFields
+      fields: experiencePublishFields,
+      sort: {sortOrder: 1}
     })
   ];
 });

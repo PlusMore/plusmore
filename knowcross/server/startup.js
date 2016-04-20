@@ -2,6 +2,10 @@ Meteor.startup(function() {
   console.log(inProduction());
   emailer = Cluster.discoverConnection('emailService');
 
+  console.log(baseURL + 'LIST_LOCATIONS' + loginOpts);
+
+  //   console.log(roomList);
+
   if (Rooms.find({
       'hotelId': hotelID,
       imported: true
@@ -10,10 +14,7 @@ Meteor.startup(function() {
     console.log("IMPORTING ROOM LIST FOR hotel " + hotelID);
 
     // console.log(baseURL + 'LIST_LOCATIONS' + loginOpts);
-
     var roomList = urlToJSON(baseURL + 'LIST_LOCATIONS' + loginOpts);
-
-    //     console.log(roomList);
 
     _.each(roomList[0], function(value, key) {
       if (key !== 0) {
